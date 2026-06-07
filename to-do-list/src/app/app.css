@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.todo-wrapper {
+  width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px 0px rgba(34, 60, 80, 0.3);
+}
