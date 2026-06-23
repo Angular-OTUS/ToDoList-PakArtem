@@ -1,9 +1,10 @@
-import { Component, computed, signal } from '@angular/core';
-import { ToDoHeader } from '../to-do-header/to-do-header';
-import { FormsModule } from '@angular/forms';
-import { NgClass } from '@angular/common';
-import { ToDoListItemComponent } from '../to-do-list-item-component/to-do-list-item-component';
-import { MatInputModule } from '@angular/material/input';
+import { Component, computed, signal } from "@angular/core";
+import { ToDoHeader } from "../to-do-header/to-do-header";
+import { FormsModule } from "@angular/forms";
+import { NgClass } from "@angular/common";
+import { ToDoItem } from "../to-do-item/to-do-item";
+import { MatInputModule } from "@angular/material/input";
+
 interface Task {
   id: number;
   text: string;
@@ -11,7 +12,7 @@ interface Task {
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [ToDoHeader, FormsModule, NgClass, ToDoListItemComponent, MatInputModule],
+  imports: [ToDoHeader, FormsModule, NgClass, ToDoItem, MatInputModule],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.css',
 })

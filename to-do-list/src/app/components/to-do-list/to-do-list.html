@@ -1,13 +1,12 @@
 <app-to-do-header></app-to-do-header>
-<div class="list">
+<ul class="list">
   @for (task of tasks(); track task.id) {
-    <app-to-do-list-item-component
+    <app-to-do-item
       [text]="task.text"
-      [id]="task.id"
-      (delete)="deleteTask($event)"
+      (delete)="deleteTask(task.id)"
     />
   }
-</div>
+</ul>
 <div class="form">
   <mat-form-field appearance="outline">
     <input
