@@ -1,3 +1,28 @@
+<app-to-do-header></app-to-do-header>
 <ul class="list">
-  <ng-content></ng-content>
+  @for (task of tasks(); track task.id) {
+    <app-to-do-item
+      [text]="task.text"
+      (delete)="deleteTask(task.id)"
+    />
+  }
 </ul>
+<div class="form">
+  <mat-form-field appearance="outline">
+    <input
+      class="input"
+      matInput
+      placeholder="Add your new todo"
+      [(ngModel)]="inputValue"
+    >
+  </mat-form-field>
+  <button
+    class="btn btn--add"
+    [ngClass]="{'btn-disabled': isInputEmpty()}"
+    [disabled]="isInputEmpty()"
+    (click) = "addTask()"
+  >
+    Add task
+  </button>
+</div>
+

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { Button } from '../button/button';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-to-do-item',
-  imports: [Button],
   templateUrl: './to-do-item.html',
   styleUrl: './to-do-item.css',
 })
-export class ToDoItem {}
+export class ToDoItem {
+  text = input.required<string>();
+  delete = output<void>();
+}

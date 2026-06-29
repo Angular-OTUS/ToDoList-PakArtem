@@ -1,11 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { ToDoHeader } from './components/to-do-header/to-do-header';
 import { ToDoList} from './components/to-do-list/to-do-list';
-import { ToDoForm } from './components/to-do-form/to-do-form';
-import { ToDoItem } from './components/to-do-item/to-do-item';
 @Component({
   selector: 'app-root',
-  imports: [ToDoHeader, ToDoList, ToDoForm, ToDoItem],
+  imports: [ToDoList],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

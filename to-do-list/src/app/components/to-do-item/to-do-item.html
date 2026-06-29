@@ -1,4 +1,9 @@
-<li class="item">
-  <ng-content></ng-content>
-  <app-button>Delete</app-button>
+<li class="task">
+  {{text()}}
+  <button
+    class="btn btn--delete"
+    (click)="this.delete.emit()"
+  >
+    Delete
+  </button>
 </li>

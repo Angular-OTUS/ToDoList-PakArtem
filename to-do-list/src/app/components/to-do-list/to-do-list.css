@@ -4,3 +4,47 @@
   row-gap: 10px;
   margin-bottom: 30px;
 }
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background: white;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  width: 100%;
+}
+
+.form mat-form-field {
+  flex: 1;
+}
+
+.form .btn {
+  flex-shrink: 0;
+}
+
+.btn {
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn--add {
+  background-color: #4CAF50;
+}
+
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
