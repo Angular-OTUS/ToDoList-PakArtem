@@ -27,10 +27,6 @@
   flex: 1;
 }
 
-.form .btn {
-  flex-shrink: 0;
-}
-
 .spinnerWrapper {
   display: flex;
   align-items: center;

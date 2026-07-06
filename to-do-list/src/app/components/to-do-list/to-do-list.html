@@ -25,8 +25,8 @@
     >
   </mat-form-field>
   <app-to-do-button
-    [inputTitle]="'Add task'"
-    [class]="{'btn-disabled': isInputEmpty()}"
+    inputTitle="Add task"
+    variant="add"
     [disabled]="isInputEmpty()"
     (clickBtn)="addTask()"
   />

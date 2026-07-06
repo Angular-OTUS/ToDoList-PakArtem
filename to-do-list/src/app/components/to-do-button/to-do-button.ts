@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-to-do-button',
@@ -8,5 +8,11 @@ import { Component, input, output } from '@angular/core';
 export class ToDoButtonComponent {
   inputTitle = input<string>();
   disabled = input<boolean>(false);
+  variant = input<'add' | 'delete'>('add');
   clickBtn = output<void>();
+
+  buttonClass = computed(() => ({
+    'btn--add': this.variant() === 'add',
+    'btn--delete': this.variant() === 'delete',
+  }));
 }

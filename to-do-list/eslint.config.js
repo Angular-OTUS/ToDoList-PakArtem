@@ -15,6 +15,7 @@ module.exports = defineConfig([
     ],
     processor: angular.processInlineTemplates,
     rules: {
+      'comma-dangle': ['error', 'always-multiline'],
       '@angular-eslint/directive-selector': [
         'error',
         {
@@ -36,8 +37,6 @@ module.exports = defineConfig([
   {
     files: ['**/*.html'],
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
-    rules: {
-      "comma-dangle": [2, "always-multiline"]
-    },
+    rules: {},
   },
 ]);
