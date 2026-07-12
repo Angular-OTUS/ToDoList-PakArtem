@@ -9,14 +9,14 @@
 }
 
 .btn:disabled {
-  opacity: .5;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .btn--add {
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 
 .btn--delete {
-  background-color: #D94F43;
+  background-color: #d94f43;
 }

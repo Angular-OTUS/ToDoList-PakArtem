@@ -1,10 +1,10 @@
-import { Component, computed, OnInit, signal } from "@angular/core";
-import { ToDoHeader } from "../to-do-header/to-do-header";
-import { FormsModule } from "@angular/forms";
-import { ToDoItem } from "../to-do-item/to-do-item";
-import { MatInputModule } from "@angular/material/input";
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { ToDoButtonComponent } from "../to-do-button/to-do-button";
+import { Component, computed, OnInit, signal } from '@angular/core';
+import { ToDoHeader } from '../to-do-header/to-do-header';
+import { FormsModule } from '@angular/forms';
+import { ToDoItem } from '../to-do-item/to-do-item';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ToDoButton } from '../to-do-button/to-do-button';
 
 interface Task {
   id: number;
@@ -13,11 +13,18 @@ interface Task {
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [ToDoHeader, FormsModule, ToDoItem, MatInputModule, MatProgressSpinnerModule, ToDoButtonComponent],
+  imports: [
+    ToDoHeader,
+    FormsModule,
+    ToDoItem,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    ToDoButton,
+  ],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.css',
 })
-export class ToDoList implements OnInit{
+export class ToDoList implements OnInit {
   isLoading = signal<boolean>(true);
   inputValue = signal('');
   tasks = signal<Task[]>([
@@ -27,7 +34,7 @@ export class ToDoList implements OnInit{
 
   ngOnInit() {
     setTimeout(() => {
-      this.isLoading.set(false)
+      this.isLoading.set(false);
     }, 1000);
   }
 
@@ -36,15 +43,15 @@ export class ToDoList implements OnInit{
   });
 
   deleteTask(idDelete: number) {
-    this.tasks.update(tasks => tasks.filter(({id}) => id !== idDelete));
+    this.tasks.update((tasks) => tasks.filter(({ id }) => id !== idDelete));
   }
 
   addTask() {
     const currentTasks = this.tasks();
-    const maxId = Math.max(...currentTasks.map(task => task.id), 0);
+    const maxId = Math.max(...currentTasks.map((task) => task.id), 0);
     const id = maxId + 1;
     const text = this.inputValue().trim();
-    this.tasks.update(tasks => [...tasks, {id, text}]);
-    this.inputValue.set("");
+    this.tasks.update((tasks) => [...tasks, { id, text }]);
+    this.inputValue.set('');
   }
 }

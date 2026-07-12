@@ -5,7 +5,7 @@ import { Component, computed, input, output } from '@angular/core';
   templateUrl: './to-do-button.html',
   styleUrl: './to-do-button.css',
 })
-export class ToDoButtonComponent {
+export class ToDoButton {
   inputTitle = input<string>();
   disabled = input<boolean>(false);
   variant = input<'add' | 'delete'>('add');

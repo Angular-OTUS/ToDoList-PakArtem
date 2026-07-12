@@ -1,28 +1,20 @@
 <app-to-do-header></app-to-do-header>
 
-@if(isLoading()) {
+@if (isLoading()) {
   <div class="spinnerWrapper">
     <mat-spinner></mat-spinner>
   </div>
 } @else {
   <ul class="list">
     @for (task of tasks(); track task.id) {
-      <app-to-do-item
-        [text]="task.text"
-        (delete)="deleteTask(task.id)"
-      />
+      <app-to-do-item [text]="task.text" (delete)="deleteTask(task.id)" />
     }
   </ul>
 }
 
 <div class="form">
   <mat-form-field appearance="outline">
-    <input
-      class="input"
-      matInput
-      placeholder="Add your new todo"
-      [(ngModel)]="inputValue"
-    >
+    <input class="input" matInput placeholder="Add your new todo" [(ngModel)]="inputValue" />
   </mat-form-field>
   <app-to-do-button
     inputTitle="Add task"
@@ -31,4 +23,3 @@
     (clickBtn)="addTask()"
   />
 </div>
-
