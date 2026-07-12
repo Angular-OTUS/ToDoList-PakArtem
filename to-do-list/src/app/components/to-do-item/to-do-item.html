@@ -1,9 +1,4 @@
 <li class="task">
-  {{text()}}
-  <button
-    class="btn btn--delete"
-    (click)="this.delete.emit()"
-  >
-    Delete
-  </button>
+  {{ text() }}
+  <app-to-do-button inputTitle="Delete" variant="delete" (clickBtn)="delete.emit()" />
 </li>

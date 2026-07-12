@@ -27,24 +27,9 @@
   flex: 1;
 }
 
-.form .btn {
-  flex-shrink: 0;
-}
-
-.btn {
-  padding: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.btn--add {
-  background-color: #4CAF50;
-}
-
-.btn-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 15px;
 }

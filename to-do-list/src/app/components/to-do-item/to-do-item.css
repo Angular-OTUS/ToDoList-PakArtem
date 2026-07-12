@@ -7,16 +7,3 @@
   border-radius: 5px;
   padding-inline: 20px;
 }
-
-.btn {
-  padding: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.btn--delete {
-  background-color: #D94F43;
-}
