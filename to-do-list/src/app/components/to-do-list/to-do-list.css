@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-  margin-bottom: 30px;
+  flex: 1;
 }
 
 .input {
@@ -16,15 +16,31 @@
   outline: none;
 }
 
+.textarea {
+  width: 100%;
+  font-size: 1rem;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background: white;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
 .form {
   display: flex;
-  gap: 12px;
-  align-items: baseline;
-  width: 100%;
+  gap: 16px;
+  align-items: flex-start;
 }
 
 .form mat-form-field {
   flex: 1;
+}
+
+.form-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .spinnerWrapper {
@@ -32,4 +48,17 @@
   align-items: center;
   justify-content: center;
   padding-block: 15px;
+}
+
+.listWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin-bottom: 25px;
+}
+
+.description {
+  width: 30%;
+  padding: 5px;
+  background-color: #f2f2f2;
 }
