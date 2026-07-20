@@ -1,4 +1,4 @@
-.task {
+:host {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,6 +9,6 @@
   cursor: pointer;
 }
 
-.selected {
+:host(.selected) {
   background-color: #ababab;
 }

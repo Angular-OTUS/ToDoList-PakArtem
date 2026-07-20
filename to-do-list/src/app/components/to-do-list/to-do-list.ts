@@ -6,12 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ToDoButton } from '../to-do-button/to-do-button';
 import { TooltipDirective } from '../../directives/tooltip';
-
-interface Task {
-  id: number;
-  text: string;
-  description: string;
-}
+import { Task } from '../../interfaces/task.interface';
 
 @Component({
   selector: 'app-to-do-list',

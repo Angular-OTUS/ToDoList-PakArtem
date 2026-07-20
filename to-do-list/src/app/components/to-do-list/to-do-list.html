@@ -8,13 +8,17 @@
   <div class="listWrapper">
     <ul class="list">
       @for (task of tasks(); track task.id) {
-        <app-to-do-item
+        <li
+          appToDoItem
+          tabindex="0"
+          appTooltip="Показать описание"
           [isSelected]="selectedItemId() === task.id"
           [text]="task.text"
-          (click)="selectedItemId.set(task.id)"
           (delete)="deleteTask(task.id)"
-          appTooltip="Показать описание"
-        />
+          (keydown.enter)="selectedItemId.set(task.id)"
+          (keydown.space)="selectedItemId.set(task.id)"
+          (click)="selectedItemId.set(task.id)"
+        ></li>
       }
     </ul>
     <div class="description">
@@ -26,7 +30,12 @@
 <div class="form">
   <div class="form-fields">
     <mat-form-field appearance="outline">
-      <input class="input" matInput placeholder="Add your new todo" [(ngModel)]="inputValue" />
+      <input
+        class="input"
+        matInput
+        placeholder="Add your new todo"
+        [(ngModel)]="inputValue"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <textarea
@@ -40,10 +49,10 @@
     </mat-form-field>
   </div>
   <app-to-do-button
+    appTooltip="Добавить задачу"
     inputTitle="Add task"
     variant="add"
     [disabled]="isInputEmpty()"
     (clickBtn)="addTask()"
-    appTooltip="Добавить задачу"
   />
 </div>

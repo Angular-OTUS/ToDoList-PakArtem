@@ -1,12 +1,8 @@
-<li
-  class="task"
-  [class.selected]="isSelected()"
->
-  {{ text() }}
-  <app-to-do-button
-    inputTitle="Delete"
-    variant="delete"
-    (clickBtn)="delete.emit()"
-    appTooltip="Удалить задачу"
-  />
-</li>
+{{ text() }}
+<app-to-do-button
+  appTooltip="Удалить задачу"
+  inputTitle="Delete"
+  variant="delete"
+  (clickBtn)="delete.emit()"
+/>
+
