@@ -1,4 +1,4 @@
-import { Component, computed, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { ToDoHeader } from '../to-do-header/to-do-header';
 import { FormsModule } from '@angular/forms';
 import { ToDoItem } from '../to-do-item/to-do-item';
@@ -21,7 +21,6 @@ import { Task } from '../../interfaces/task.interface';
   ],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToDoList implements OnInit {
   isLoading = signal<boolean>(true);
@@ -54,6 +53,7 @@ export class ToDoList implements OnInit {
 
   deleteTask(idDelete: number) {
     this.tasks.update((tasks) => tasks.filter(({ id }) => id !== idDelete));
+    this.selectedItemId.set(null);
   }
 
   addTask() {
