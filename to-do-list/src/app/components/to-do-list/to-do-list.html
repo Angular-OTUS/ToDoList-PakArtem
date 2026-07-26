@@ -5,18 +5,51 @@
     <mat-spinner></mat-spinner>
   </div>
 } @else {
-  <ul class="list">
-    @for (task of tasks(); track task.id) {
-      <app-to-do-item [text]="task.text" (delete)="deleteTask(task.id)" />
-    }
-  </ul>
+  <div class="listWrapper">
+    <ul class="list">
+      @for (task of tasks(); track task.id) {
+        <li
+          appToDoItem
+          tabindex="0"
+          appTooltip="Показать описание"
+          [isSelected]="selectedItemId() === task.id"
+          [text]="task.text"
+          (delete)="deleteTask(task.id)"
+          (keydown.enter)="selectedItemId.set(task.id)"
+          (keydown.space)="selectedItemId.set(task.id)"
+          (click)="selectedItemId.set(task.id)"
+        ></li>
+      }
+    </ul>
+    <div class="description">
+      {{selectedDescriptionTask()}}
+    </div>
+  </div>
 }
 
 <div class="form">
-  <mat-form-field appearance="outline">
-    <input class="input" matInput placeholder="Add your new todo" [(ngModel)]="inputValue" />
-  </mat-form-field>
+  <div class="form-fields">
+    <mat-form-field appearance="outline">
+      <input
+        class="input"
+        matInput
+        placeholder="Add your new todo"
+        [(ngModel)]="inputValue"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <textarea
+        class="textarea"
+        matInput
+        placeholder="Description"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        [(ngModel)]="textareaValue"
+      ></textarea>
+    </mat-form-field>
+  </div>
   <app-to-do-button
+    appTooltip="Добавить задачу"
     inputTitle="Add task"
     variant="add"
     [disabled]="isInputEmpty()"

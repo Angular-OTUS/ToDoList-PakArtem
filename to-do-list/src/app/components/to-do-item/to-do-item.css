@@ -1,4 +1,4 @@
-.task {
+:host {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6,4 +6,9 @@
   background-color: #f2f2f2;
   border-radius: 5px;
   padding-inline: 20px;
+  cursor: pointer;
+}
+
+:host(.selected) {
+  background-color: #ababab;
 }

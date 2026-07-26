@@ -1,9 +1,10 @@
 <button
-  type="button"
   class="btn"
-  [class]="buttonClass()"
+  type="button"
+  [class.btn--add]="variant() === 'add'"
+  [class.btn--delete]="variant() === 'delete'"
   [disabled]="disabled()"
-  (click)="clickBtn.emit()"
+  (click)="onClick($event)"
 >
   {{ inputTitle() }}
 </button>
