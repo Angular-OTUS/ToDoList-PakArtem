@@ -1,8 +1,28 @@
-{{ text() }}
-<app-to-do-button
-  appTooltip="Удалить задачу"
-  inputTitle="Delete"
-  variant="delete"
-  (clickBtn)="delete.emit()"
-/>
+@if(isEdit()) {
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <input
+        class="input"
+        matInput
+        placeholder="Add your new todo"
+        [(ngModel)]="inputValue"
+      />
+    </mat-form-field>
+    <app-to-do-button
+      appTooltip="Изменить задачу"
+      inputTitle="Add task"
+      variant="add"
+      textToast="Задача изменена!"
+      [disabled]="isInputEmpty()"
+      (clickBtn)="todoService.editTask(id(), inputValue());isEdit.set(false);"
+    />
+} @else {
+  {{ text() }}
+  <app-to-do-button
+    appTooltip="Удалить задачу"
+    inputTitle="Delete"
+    variant="delete"
+    textToast="Задача удалена!"
+    (clickBtn)="delete.emit()"
+  />
+}
 
