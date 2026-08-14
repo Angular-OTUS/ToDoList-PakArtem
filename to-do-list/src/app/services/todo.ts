@@ -1,11 +1,8 @@
 import { inject, Service, signal } from "@angular/core";
 import { Task } from "../interfaces/task.interface";
-import { ToastService } from "./toast";
 
 @Service()
 export class TodoService {
-  protected toastService = inject(ToastService);
-
   private readonly tasksSignal = signal<Task[]>([
     { id: 1, text: 'Task 1', description: 'description 1' },
     { id: 2, text: 'Task 2', description: 'description 2' },
@@ -22,7 +19,6 @@ export class TodoService {
     const id = maxId + 1;
 
     this.tasksSignal.update((tasks) => [...tasks, { id, text, description }]);
-    this.toastService.showToast("Добавлена задача!");
   }
 
   editTask(id: number, text: string) {
@@ -33,12 +29,10 @@ export class TodoService {
           : task,
       ),
     );
-    this.toastService.showToast("Задача изменена!");
   }
 
   deleteTask(idDelete: number) {
     this.tasksSignal.update(tasks =>tasks.filter(({ id }) => id !== idDelete));
-    this.toastService.showToast("Задача удалена!");
 
     if (this.selectedItemIdSignal() === idDelete) {
       this.selectedItemIdSignal.set(null);

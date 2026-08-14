@@ -7,6 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TooltipDirective } from '../../directives/tooltip';
 import { TodoService } from '../../services/todo';
 import { ToDoButton } from '../../directives/to-do-button';
+import { ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-to-do-list',
@@ -24,6 +25,7 @@ import { ToDoButton } from '../../directives/to-do-button';
 })
 export class ToDoList implements OnInit {
   todoService = inject(TodoService);
+  toastService = inject(ToastService);
 
   isLoading = signal<boolean>(true);
   inputValue = signal('');
@@ -54,5 +56,11 @@ export class ToDoList implements OnInit {
     this.todoService.addTask(this.inputValue().trim(), this.textareaValue().trim());
     this.inputValue.set('');
     this.textareaValue.set('');
+    this.toastService.showToast("Добавлена задача!");
+  }
+
+  deleteTask(id: number) {
+    this.todoService.deleteTask(id);
+    this.toastService.showToast('Задача удалена!');
   }
 }

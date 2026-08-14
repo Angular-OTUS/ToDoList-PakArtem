@@ -4,6 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TodoService } from '../../services/todo';
 import { FormsModule } from '@angular/forms';
 import { ToDoButton } from '../../directives/to-do-button';
+import { ToastService } from '../../services/toast';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -19,6 +20,7 @@ import { ToDoButton } from '../../directives/to-do-button';
 })
 export class ToDoItem {
   todoService = inject(TodoService);
+  toastService = inject(ToastService);
 
   id = input.required<number>();
   text = input.required<string>();
@@ -46,5 +48,6 @@ export class ToDoItem {
   onClick(): void {
     this.todoService.editTask(this.id(), this.inputValue());
     this.isEdit.set(false);
+    this.toastService.showToast("Задача изменена!");
   }
 }

@@ -15,7 +15,7 @@
           [isSelected]="selectedItemId() === task.id"
           [id]="task.id"
           [text]="task.text"
-          (delete)="todoService.deleteTask(task.id)"
+          (delete)="deleteTask(task.id)"
           (keydown.enter)="todoService.selectItem(task.id)"
           (keydown.space)="todoService.selectItem(task.id)"
           (click)="todoService.selectItem(task.id)"
