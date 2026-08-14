@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ToDoItem } from '../to-do-item/to-do-item';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ToDoButton } from '../to-do-button/to-do-button';
 import { TooltipDirective } from '../../directives/tooltip';
 import { TodoService } from '../../services/todo';
+import { ToDoButton } from '../../directives/to-do-button';
 
 @Component({
   selector: 'app-to-do-list',
@@ -16,14 +16,14 @@ import { TodoService } from '../../services/todo';
     ToDoItem,
     MatInputModule,
     MatProgressSpinnerModule,
-    ToDoButton,
     TooltipDirective,
+    ToDoButton,
   ],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.css',
 })
 export class ToDoList implements OnInit {
-  todoService = inject(TodoService );
+  todoService = inject(TodoService);
 
   isLoading = signal<boolean>(true);
   inputValue = signal('');
@@ -51,7 +51,7 @@ export class ToDoList implements OnInit {
   });
 
   addTask() {
-    this.todoService.addTask(this.inputValue(), this.textareaValue());
+    this.todoService.addTask(this.inputValue().trim(), this.textareaValue().trim());
     this.inputValue.set('');
     this.textareaValue.set('');
   }

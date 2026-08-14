@@ -1,9 +1,9 @@
-import { Component, computed, inject, input, output, signal } from '@angular/core';
-import { ToDoButton } from '../to-do-button/to-do-button';
+import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { TooltipDirective } from '../../directives/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { TodoService } from '../../services/todo';
 import { FormsModule } from '@angular/forms';
+import { ToDoButton } from '../../directives/to-do-button';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -26,9 +26,14 @@ export class ToDoItem {
 
   inputValue = signal('');
   isEdit = signal<boolean>(false);
-  editValue = signal('');
 
   delete = output<void>();
+
+  constructor() {
+    effect(() => {
+      this.inputValue.set(this.text());
+    });
+  }
 
   isInputEmpty = computed(() => {
     return this.inputValue().trim().length === 0;
@@ -36,5 +41,10 @@ export class ToDoItem {
 
   get selectedClass(): boolean {
     return this.isSelected();
+  }
+
+  onClick(): void {
+    this.todoService.editTask(this.id(), this.inputValue());
+    this.isEdit.set(false);
   }
 }

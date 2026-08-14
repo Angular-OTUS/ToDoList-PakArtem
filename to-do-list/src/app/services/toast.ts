@@ -1,20 +1,32 @@
 import { Service, signal } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
+
+interface Toast {
+  id: string;
+  message: string;
+}
 
 @Service()
 export class ToastService {
-  readonly toasts = signal<string[]>([]);
+  private readonly _toasts = signal<Toast[]>([]);
+
+  readonly toasts = this._toasts.asReadonly();
 
   showToast(message: string, duration = 3000): void {
-    this.toasts.update(toasts => [...toasts, message]);
+    const id = uuidv4();
+
+    this._toasts.update(toasts => [
+      ...toasts,
+      {
+        id,
+        message,
+      },
+    ]);
 
     setTimeout(() => {
-      this.toasts.update(toasts => {
-        const index = toasts.indexOf(message);
-
-        if (index === -1) return toasts;
-
-        return toasts.filter((_, i) => i !== index);
-      });
+      this._toasts.update(toasts =>
+        toasts.filter(toast => toast.id !== id),
+      );
     }, duration);
   }
 }

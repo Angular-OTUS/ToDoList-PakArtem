@@ -1,7 +1,7 @@
 <div class="toast-container">
-  @for (toast of toastService.toasts(); track toast) {
+  @for (toast of toastService.toasts(); track toast.id) {
     <span class="toast">
-      {{ toast }}
+      {{ toast.message }}
     </span>
   }
 </div>

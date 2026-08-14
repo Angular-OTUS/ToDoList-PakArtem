@@ -35,3 +35,26 @@
     transform: translateY(0);
   }
 }
+
+.btn {
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  background-color: #53535333;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--add {
+  background-color: #4caf50;
+}
+
+.btn--delete {
+  background-color: #d94f43;
+}

@@ -3,26 +3,31 @@
       <input
         class="input"
         matInput
-        placeholder="Add your new todo"
         [(ngModel)]="inputValue"
       />
     </mat-form-field>
-    <app-to-do-button
+    <button
+      appToDoButton
       appTooltip="Изменить задачу"
-      inputTitle="Add task"
+      type="button"
+      class="btn"
       variant="add"
-      textToast="Задача изменена!"
       [disabled]="isInputEmpty()"
-      (clickBtn)="todoService.editTask(id(), inputValue());isEdit.set(false);"
-    />
+      (click)="onClick()"
+    >
+      Save
+    </button>
 } @else {
   {{ text() }}
-  <app-to-do-button
+  <button
+    appToDoButton
     appTooltip="Удалить задачу"
-    inputTitle="Delete"
+    type="button"
+    class="btn"
     variant="delete"
-    textToast="Задача удалена!"
-    (clickBtn)="delete.emit()"
-  />
+    (click)="delete.emit()"
+  >
+    Delete
+  </button>
 }
 
