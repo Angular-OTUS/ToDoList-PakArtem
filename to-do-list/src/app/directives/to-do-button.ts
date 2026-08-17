@@ -1,4 +1,4 @@
-import { Directive, input, output } from '@angular/core';
+import { Directive, ElementRef, inject, input, output } from '@angular/core';
 
 @Directive({
   selector: '[appToDoButton]',
@@ -9,13 +9,13 @@ import { Directive, input, output } from '@angular/core';
   },
 })
 export class ToDoButton {
-  readonly disabled = input(false);
+  private readonly elementRef = inject(ElementRef<HTMLButtonElement>);
   readonly variant = input<'add' | 'delete'>('add');
 
   readonly clicked = output<void>();
 
   onClick(): void {
-    if (this.disabled()) {
+    if (this.elementRef.nativeElement.disabled) {
       return;
     }
 
