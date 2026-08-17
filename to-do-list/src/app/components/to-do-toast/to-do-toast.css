@@ -1,0 +1,29 @@
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1000;
+}
+
+.toast {
+  padding: 12px 20px;
+  background: #333;
+  color: white;
+  border-radius: 8px;
+  animation: toast-fade-in .2s ease;
+}
+
+@keyframes toast-fade-in  {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -13,11 +13,12 @@
           tabindex="0"
           appTooltip="Показать описание"
           [isSelected]="selectedItemId() === task.id"
+          [id]="task.id"
           [text]="task.text"
           (delete)="deleteTask(task.id)"
-          (keydown.enter)="selectedItemId.set(task.id)"
-          (keydown.space)="selectedItemId.set(task.id)"
-          (click)="selectedItemId.set(task.id)"
+          (keydown.enter)="todoService.selectItem(task.id)"
+          (keydown.space)="todoService.selectItem(task.id)"
+          (click)="todoService.selectItem(task.id)"
         ></li>
       }
     </ul>
@@ -29,7 +30,7 @@
 
 <div class="form">
   <div class="form-fields">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
       <input
         class="input"
         matInput
@@ -42,17 +43,22 @@
         class="textarea"
         matInput
         placeholder="Description"
+        subscriptSizing="dynamic"
         cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
         [(ngModel)]="textareaValue"
       ></textarea>
     </mat-form-field>
   </div>
-  <app-to-do-button
+  <button
+    appToDoButton
     appTooltip="Добавить задачу"
-    inputTitle="Add task"
+    type="button"
+    class="btn"
     variant="add"
     [disabled]="isInputEmpty()"
-    (clickBtn)="addTask()"
-  />
+    (click)="addTask()"
+  >
+    Add task
+  </button>
 </div>

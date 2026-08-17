@@ -1,8 +1,33 @@
-{{ text() }}
-<app-to-do-button
-  appTooltip="Удалить задачу"
-  inputTitle="Delete"
-  variant="delete"
-  (clickBtn)="delete.emit()"
-/>
+@if(isEdit()) {
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <input
+        class="input"
+        matInput
+        [(ngModel)]="inputValue"
+      />
+    </mat-form-field>
+    <button
+      appToDoButton
+      appTooltip="Изменить задачу"
+      type="button"
+      class="btn"
+      variant="add"
+      [disabled]="isInputEmpty()"
+      (click)="onClick()"
+    >
+      Save
+    </button>
+} @else {
+  {{ text() }}
+  <button
+    appToDoButton
+    appTooltip="Удалить задачу"
+    type="button"
+    class="btn"
+    variant="delete"
+    (click)="delete.emit()"
+  >
+    Delete
+  </button>
+}
 
