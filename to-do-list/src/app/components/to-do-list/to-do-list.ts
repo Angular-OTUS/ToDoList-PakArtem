@@ -6,8 +6,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TooltipDirective } from '../../directives/tooltip';
 import { TodoService } from '../../services/todo';
-import { ToDoButton } from '../../directives/to-do-button';
 import { ToastService } from '../../services/toast';
+import { MatSelectModule } from '@angular/material/select';
+import { Status } from '../../interfaces/status.interface';
+import { TodoStatus } from '../../type/todo-status.type';
+import { ToDoCreateItem } from '../to-do-create-item/to-do-create-item';
 
 @Component({
   selector: 'app-to-do-list',
@@ -18,7 +21,8 @@ import { ToastService } from '../../services/toast';
     MatInputModule,
     MatProgressSpinnerModule,
     TooltipDirective,
-    ToDoButton,
+    MatSelectModule,
+    ToDoCreateItem,
   ],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.css',
@@ -27,40 +31,47 @@ export class ToDoList implements OnInit {
   todoService = inject(TodoService);
   toastService = inject(ToastService);
 
-  isLoading = signal<boolean>(true);
-  inputValue = signal('');
-  textareaValue = signal('');
+  selectedStatus = signal<TodoStatus | null>(null);
+
   selectedItemId = this.todoService.selectedItemId;
 
-  tasks = this.todoService.getTasks();
+  statuses: Status[] = [
+    { value: null, viewValue: 'ALL' },
+    { value: 'InProgress', viewValue: 'In Progress' },
+    { value: 'Completed', viewValue: 'Completed' },
+  ];
+
+  tasks = this.todoService.tasks;
+  isLoading = this.todoService.isLoading;
 
   selectedDescriptionTask = computed(() => {
     const selectedId = this.selectedItemId();
     if (selectedId === null) return;
 
-    const task = this.tasks().find(task => task.id === selectedId);
+    const task = this.tasks().find((task) => task.id === selectedId);
     return task ? task.description : 'Задача не найдена';
   });
 
   ngOnInit() {
-    setTimeout(() => {
-      this.isLoading.set(false);
-    }, 1000);
+    this.todoService.getTasks();
   }
 
-  isInputEmpty = computed(() => {
-    return this.inputValue().trim().length === 0;
+  filteredTasks = computed(() => {
+    const status = this.selectedStatus();
+
+    if (status === null) {
+      return this.tasks();
+    }
+
+    return this.tasks().filter((task) => task.status === status);
   });
-
-  addTask() {
-    this.todoService.addTask(this.inputValue().trim(), this.textareaValue().trim());
-    this.inputValue.set('');
-    this.textareaValue.set('');
-    this.toastService.showToast("Добавлена задача!");
-  }
 
   deleteTask(id: number) {
     this.todoService.deleteTask(id);
     this.toastService.showToast('Задача удалена!');
+  }
+
+  changeStatus(id: number, status: TodoStatus) {
+    this.todoService.changeStatus(id, status);
   }
 }

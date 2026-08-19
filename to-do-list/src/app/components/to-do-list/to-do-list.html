@@ -1,5 +1,14 @@
 <app-to-do-header></app-to-do-header>
 
+<mat-form-field class="status-filter">
+  <mat-label>Status</mat-label>
+  <mat-select [(ngModel)]="selectedStatus">
+    @for (status of statuses; track status) {
+      <mat-option [value]="status.value">{{ status.viewValue }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
 @if (isLoading()) {
   <div class="spinnerWrapper">
     <mat-spinner></mat-spinner>
@@ -7,7 +16,7 @@
 } @else {
   <div class="listWrapper">
     <ul class="list">
-      @for (task of tasks(); track task.id) {
+      @for (task of filteredTasks(); track task.id) {
         <li
           appToDoItem
           tabindex="0"
@@ -15,7 +24,9 @@
           [isSelected]="selectedItemId() === task.id"
           [id]="task.id"
           [text]="task.text"
+          [status]="task.status"
           (delete)="deleteTask(task.id)"
+          (statusChange)="changeStatus(task.id, $event)"
           (keydown.enter)="todoService.selectItem(task.id)"
           (keydown.space)="todoService.selectItem(task.id)"
           (click)="todoService.selectItem(task.id)"
@@ -23,42 +34,9 @@
       }
     </ul>
     <div class="description">
-      {{selectedDescriptionTask()}}
+      {{ selectedDescriptionTask() }}
     </div>
   </div>
 }
 
-<div class="form">
-  <div class="form-fields">
-    <mat-form-field appearance="outline" subscriptSizing="dynamic">
-      <input
-        class="input"
-        matInput
-        placeholder="Add your new todo"
-        [(ngModel)]="inputValue"
-      />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <textarea
-        class="textarea"
-        matInput
-        placeholder="Description"
-        subscriptSizing="dynamic"
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        [(ngModel)]="textareaValue"
-      ></textarea>
-    </mat-form-field>
-  </div>
-  <button
-    appToDoButton
-    appTooltip="Добавить задачу"
-    type="button"
-    class="btn"
-    variant="add"
-    [disabled]="isInputEmpty()"
-    (click)="addTask()"
-  >
-    Add task
-  </button>
-</div>
+<app-to-do-create-item></app-to-do-create-item>
