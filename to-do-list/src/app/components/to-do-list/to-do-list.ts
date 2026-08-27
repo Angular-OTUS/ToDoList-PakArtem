@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Status } from '../../interfaces/status.interface';
 import { TodoStatus } from '../../type/todo-status.type';
 import { ToDoCreateItem } from '../to-do-create-item/to-do-create-item';
+import { ToDoSpinner } from '../to-do-spinner/to-do-spinner';
 
 @Component({
   selector: 'app-to-do-list',
@@ -23,6 +24,7 @@ import { ToDoCreateItem } from '../to-do-create-item/to-do-create-item';
     TooltipDirective,
     MatSelectModule,
     ToDoCreateItem,
+    ToDoSpinner,
   ],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.css',

@@ -11,7 +11,7 @@
 
 @if (isLoading()) {
   <div class="spinnerWrapper">
-    <mat-spinner></mat-spinner>
+    <app-to-do-spinner [size]="60"/>
   </div>
 } @else {
   <div class="listWrapper">
