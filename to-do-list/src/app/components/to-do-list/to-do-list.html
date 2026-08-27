@@ -10,11 +10,11 @@
 </mat-form-field>
 
 @if (isLoading()) {
-  <div class="spinnerWrapper">
+  <div class="spinner-wrapper">
     <app-to-do-spinner [size]="60"/>
   </div>
 } @else {
-  <div class="listWrapper">
+  <div class="list-wrapper">
     <ul class="list">
       @for (task of filteredTasks(); track task.id) {
         <li

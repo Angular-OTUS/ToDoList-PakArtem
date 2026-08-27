@@ -5,14 +5,14 @@
   flex: 1;
 }
 
-.spinnerWrapper {
+.spinner-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-block: 15px;
 }
 
-.listWrapper {
+.list-wrapper {
   display: flex;
   justify-content: space-between;
   gap: 5px;
