@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Task } from '../interfaces/task.interface';
 import { TodoStatus } from '../type/todo-status.type';
+import { finalize } from 'rxjs';
 
 @Service()
 export class TodoService {
@@ -20,16 +21,17 @@ export class TodoService {
   getTasks() {
     this.isLoading.set(true);
 
-    this.http.get<Task[]>(this.apiUrl).subscribe({
-      next: (tasks) => {
-        this.tasksSignal.set(tasks);
-        this.isLoading.set(false);
-      },
-      error: (error) => {
-        console.error('Ошибка получения задач:', error);
-        this.isLoading.set(false);
-      },
-    });
+    this.http
+      .get<Task[]>(this.apiUrl)
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: (tasks) => {
+          this.tasksSignal.set(tasks);
+        },
+        error: (error) => {
+          console.error('Ошибка получения задач:', error);
+        },
+      });
   }
 
   addTask(text: string, description: string) {

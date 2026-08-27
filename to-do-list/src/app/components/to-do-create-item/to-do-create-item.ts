@@ -26,7 +26,8 @@ export class ToDoCreateItem {
   @ViewChild('todoForm') todoForm!: NgForm;
 
   addTask() {
-    const { title, description } = this.model;
+    const title = (this.model.title || '').trim();
+    const description = (this.model.description || '').trim();
 
     this.todoService.addTask(title.trim(), description.trim());
 

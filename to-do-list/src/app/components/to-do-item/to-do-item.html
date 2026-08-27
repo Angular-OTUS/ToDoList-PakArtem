@@ -14,13 +14,15 @@
     Save
   </button>
 } @else {
+  @let itemStatus = status();
   <input
+    #statusCheckbox
     type="checkbox"
-    [checked]="status() === 'Completed'"
-    [appTooltip]="status() === 'Completed' ? 'Вернуть в работу' : 'Завершить задачу'"
+    [checked]="itemStatus === 'Completed'"
+    [appTooltip]="itemStatus === 'Completed' ? 'Вернуть в работу' : 'Завершить задачу'"
     (click)="$event.stopPropagation()"
     (dblclick)="$event.stopPropagation()"
-    (change)="onStatusChange($event)"
+    (change)="onStatusChange(statusCheckbox.checked)"
   />
   {{ text() }}
   <button

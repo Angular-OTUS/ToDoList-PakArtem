@@ -15,7 +15,7 @@ import { TodoStatus } from '../../type/todo-status.type';
   styleUrl: './to-do-item.css',
   host: {
     class: 'task',
-    '[class.selected]': 'selectedClass',
+    '[class.selected]': 'this.isSelected()',
     '(dblclick)': 'isEdit.set(true)',
   },
 })
@@ -44,22 +44,14 @@ export class ToDoItem {
     return this.inputValue().trim().length === 0;
   });
 
-  get selectedClass(): boolean {
-    return this.isSelected();
-  }
-
   onClick(): void {
     this.todoService.editTask(this.id(), this.inputValue());
     this.isEdit.set(false);
     this.toastService.showToast('Задача изменена!');
   }
 
-  onStatusChange(event: Event): void {
-    event.stopPropagation();
-
-    const checkbox = event.target as HTMLInputElement;
-
-    const newStatus: TodoStatus = checkbox.checked ? 'Completed' : 'InProgress';
+  onStatusChange(checked: boolean): void {
+    const newStatus: TodoStatus = checked ? 'Completed' : 'InProgress';
 
     this.statusChange.emit(newStatus);
 
