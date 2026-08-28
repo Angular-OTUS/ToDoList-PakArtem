@@ -3,14 +3,14 @@ import { TooltipDirective } from '../../directives/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { TodoService } from '../../services/todo';
 import { FormsModule } from '@angular/forms';
-import { ToDoButton } from '../../directives/to-do-button';
 import { ToastService } from '../../services/toast';
 import { TodoStatus } from '../../type/todo-status.type';
+import { ToDoButton } from '../to-do-button/to-do-button';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'li[appToDoItem]',
-  imports: [ToDoButton, TooltipDirective, MatInputModule, FormsModule],
+  imports: [TooltipDirective, MatInputModule, FormsModule, ToDoButton],
   templateUrl: './to-do-item.html',
   styleUrl: './to-do-item.css',
   host: {

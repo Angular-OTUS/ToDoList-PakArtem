@@ -5,12 +5,13 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { TodoService } from '../../services/todo';
 import { ToastService } from '../../services/toast';
-import { ToDoButton } from '../../directives/to-do-button';
+
 import { TooltipDirective } from '../../directives/tooltip';
+import { ToDoButton } from '../to-do-button/to-do-button';
 
 @Component({
   selector: 'app-to-do-create-item',
-  imports: [FormsModule, MatInputModule, TextFieldModule, ToDoButton, TooltipDirective],
+  imports: [FormsModule, MatInputModule, TextFieldModule, TooltipDirective, ToDoButton],
   templateUrl: './to-do-create-item.html',
   styleUrl: './to-do-create-item.css',
 })
