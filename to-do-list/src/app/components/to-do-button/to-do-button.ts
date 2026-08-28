@@ -1,7 +1,10 @@
-import { Directive, ElementRef, inject, input, output } from '@angular/core';
+import { Component, ElementRef, inject, input, output } from '@angular/core';
 
-@Directive({
-  selector: '[appToDoButton]',
+@Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'button[app-button]',
+  template: `<ng-content />`,
+  styleUrl: './to-do-button.css',
   host: {
     '(click)': 'onClick()',
     '[class.btn--add]': 'variant() === "add"',

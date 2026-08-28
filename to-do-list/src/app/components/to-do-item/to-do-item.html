@@ -1,26 +1,32 @@
-@if(isEdit()) {
-    <mat-form-field appearance="outline" subscriptSizing="dynamic">
-      <input
-        class="input"
-        matInput
-        [(ngModel)]="inputValue"
-      />
-    </mat-form-field>
-    <button
-      appToDoButton
-      appTooltip="Изменить задачу"
-      type="button"
-      class="btn"
-      variant="add"
-      [disabled]="isInputEmpty()"
-      (click)="onClick()"
-    >
-      Save
-    </button>
+@if (isEdit()) {
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <input class="title-input" matInput [(ngModel)]="inputValue" />
+  </mat-form-field>
+  <button
+    app-button
+    appTooltip="Изменить задачу"
+    type="button"
+    class="btn"
+    variant="add"
+    [disabled]="isInputEmpty()"
+    (click)="onClick()"
+  >
+    Save
+  </button>
 } @else {
+  @let itemStatus = status();
+  <input
+    #statusCheckbox
+    type="checkbox"
+    [checked]="itemStatus === 'Completed'"
+    [appTooltip]="itemStatus === 'Completed' ? 'Вернуть в работу' : 'Завершить задачу'"
+    (click)="$event.stopPropagation()"
+    (dblclick)="$event.stopPropagation()"
+    (change)="onStatusChange(statusCheckbox.checked)"
+  />
   {{ text() }}
   <button
-    appToDoButton
+    app-button
     appTooltip="Удалить задачу"
     type="button"
     class="btn"
@@ -30,4 +36,3 @@
     Delete
   </button>
 }
-

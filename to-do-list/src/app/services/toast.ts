@@ -15,7 +15,7 @@ export class ToastService {
   showToast(message: string, duration = 3000): void {
     const id = uuidv4();
 
-    this._toasts.update(toasts => [
+    this._toasts.update((toasts) => [
       ...toasts,
       {
         id,
@@ -24,9 +24,7 @@ export class ToastService {
     ]);
 
     setTimeout(() => {
-      this._toasts.update(toasts =>
-        toasts.filter(toast => toast.id !== id),
-      );
+      this._toasts.update((toasts) => toasts.filter((toast) => toast.id !== id));
     }, duration);
   }
 }

@@ -13,7 +13,7 @@ export class TooltipDirective implements OnDestroy {
   private readonly el = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
 
-  readonly appTooltip = input<string>("");
+  readonly appTooltip = input<string>('');
 
   private tooltipElement: HTMLElement | null = null;
   private static activeTooltip: TooltipDirective | null = null;

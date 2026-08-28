@@ -1,0 +1,38 @@
+<form #todoForm="ngForm" class="form" (ngSubmit)="addTask()">
+  <div class="form-fields">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <input
+        class="input"
+        name="title"
+        matInput
+        placeholder="Add your new todo"
+        [(ngModel)]="model.title"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <textarea
+        class="description-input"
+        name="description"
+        matInput
+        placeholder="Description"
+        subscriptSizing="dynamic"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        [(ngModel)]="model.description"
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <button
+    app-button
+    appTooltip="Добавить задачу"
+    type="submit"
+    class="btn"
+    variant="add"
+    [disabled]="todoForm.invalid"
+  >
+    Add task
+  </button>
+</form>
