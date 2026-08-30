@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { ToDoList } from './components/to-do-list/to-do-list';
 import { ToDoToast } from './components/to-do-toast/to-do-toast';
+import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-root',
-  imports: [ToDoList, ToDoToast],
+  imports: [ToDoToast, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

@@ -1,0 +1,17 @@
+<div class="task-status">
+  <input
+    #statusCheckbox
+    type="checkbox"
+    [checked]="task()?.status === 'Completed'"
+    (change)="onStatusChange(statusCheckbox.checked)"
+  />
+
+  {{ task()?.status === 'Completed'
+    ? 'Вернуть в работу'
+    : 'Завершить задачу'
+  }}
+</div>
+
+<div>
+  {{ task()?.description }}
+</div>

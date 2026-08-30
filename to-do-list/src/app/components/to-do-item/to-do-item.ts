@@ -15,7 +15,7 @@ import { ToDoButton } from '../to-do-button/to-do-button';
   styleUrl: './to-do-item.css',
   host: {
     class: 'task',
-    '[class.selected]': 'this.isSelected()',
+    '[class.selected]': 'isSelected()',
     '(dblclick)': 'isEdit.set(true)',
   },
 })
@@ -58,5 +58,10 @@ export class ToDoItem {
     this.toastService.showToast(
       newStatus === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
     );
+  }
+
+  deleteTask(event: MouseEvent) {
+    event.stopPropagation();
+    this.delete.emit()
   }
 }
