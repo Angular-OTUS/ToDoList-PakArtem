@@ -9,10 +9,6 @@
   cursor: pointer;
 }
 
-:host(.selected) {
-  background-color: #ababab;
-}
-
 :host button {
   align-self: stretch;
 }

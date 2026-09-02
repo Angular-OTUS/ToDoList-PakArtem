@@ -1,0 +1,5 @@
+@if (taskId()) {
+  <app-to-do-item-view [task]="task()" (statusChange)="onStatusChange($event)" />
+} @else {
+  <app-to-do-error-state />
+}

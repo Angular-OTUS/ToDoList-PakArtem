@@ -15,17 +15,15 @@ import { ToDoButton } from '../to-do-button/to-do-button';
   styleUrl: './to-do-item.css',
   host: {
     class: 'task',
-    '[class.selected]': 'isSelected()',
     '(dblclick)': 'isEdit.set(true)',
   },
 })
 export class ToDoItem {
-  todoService = inject(TodoService);
-  toastService = inject(ToastService);
+  private readonly todoService = inject(TodoService);
+  private readonly toastService = inject(ToastService);
 
   id = input.required<number>();
   text = input.required<string>();
-  isSelected = input<boolean>(false);
   status = input<TodoStatus | null>('InProgress');
 
   inputValue = signal('');
@@ -62,6 +60,6 @@ export class ToDoItem {
 
   deleteTask(event: MouseEvent) {
     event.stopPropagation();
-    this.delete.emit()
+    this.delete.emit();
   }
 }
