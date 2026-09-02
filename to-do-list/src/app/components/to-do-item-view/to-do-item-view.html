@@ -1,17 +1,25 @@
-<div class="task-status">
-  <input
-    #statusCheckbox
-    type="checkbox"
-    [checked]="task()?.status === 'Completed'"
-    (change)="onStatusChange(statusCheckbox.checked)"
-  />
+@let taskData = task();
 
-  {{ task()?.status === 'Completed'
-    ? 'Вернуть в работу'
-    : 'Завершить задачу'
-  }}
-</div>
+@if (taskData) {
+  @let isCompleted = taskData.status === 'Completed';
+  @let statusActionText = isCompleted ? 'Вернуть в работу' : 'Завершить задачу';
 
-<div>
-  {{ task()?.description }}
-</div>
+  <div class="task-status">
+    <input
+      #statusCheckbox
+      class="cursor-pointer"
+      type="checkbox"
+      [appTooltip]="statusActionText"
+      [checked]="isCompleted"
+      (change)="onStatusChange(statusCheckbox.checked)"
+    />
+
+    {{ statusActionText }}
+  </div>
+
+  <hr />
+
+  <div class="description-text">
+    {{ taskData.description }}
+  </div>
+}

@@ -16,7 +16,6 @@ export class TodoService {
   readonly isLoading = signal(false);
 
   readonly tasks = this.tasksSignal.asReadonly();
-  readonly selectedItemId = this.selectedItemIdSignal.asReadonly();
 
   getTasks() {
     this.isLoading.set(true);

@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ToDoToast } from './components/to-do-toast/to-do-toast';
-import { RouterOutlet } from "@angular/router";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',

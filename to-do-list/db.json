@@ -4,13 +4,19 @@
       "id": 1,
       "text": "Task 1",
       "description": "description 1",
-      "status": "Completed"
+      "status": "InProgress"
     },
     {
       "text": "Task 2",
       "description": "description",
       "status": "Completed",
       "id": 2
+    },
+    {
+      "text": "4",
+      "description": "22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222224444444444444444444444444444",
+      "status": "Completed",
+      "id": 3
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
