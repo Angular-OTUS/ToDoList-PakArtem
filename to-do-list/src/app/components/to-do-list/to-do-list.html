@@ -28,6 +28,7 @@
             [text]="task.text"
             [status]="task.status"
             (delete)="deleteTask(task.id)"
+            (statusChange)="changeStatus(task.id, $event)"
           ></li>
         }
       </ul>

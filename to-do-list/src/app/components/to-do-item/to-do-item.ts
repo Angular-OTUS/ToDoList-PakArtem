@@ -30,6 +30,7 @@ export class ToDoItem {
   isEdit = signal<boolean>(false);
 
   delete = output<void>();
+  statusChange = output<TodoStatus>();
 
   constructor() {
     effect(() => {
@@ -49,6 +50,8 @@ export class ToDoItem {
 
   onStatusChange(checked: boolean): void {
     const newStatus: TodoStatus = checked ? 'Completed' : 'InProgress';
+
+    this.statusChange.emit(newStatus);
 
     this.toastService.showToast(
       newStatus === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
