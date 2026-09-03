@@ -9,7 +9,7 @@ import { TooltipDirective } from '../../directives/tooltip';
   styleUrl: './to-do-item-view.css',
 })
 export class ToDoItemView {
-  readonly task = input<Task | null>(null);
+  readonly task = input.required<Task>();
 
   readonly statusChange = output<boolean>();
 

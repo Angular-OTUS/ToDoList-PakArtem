@@ -12,7 +12,6 @@ export class TodoService {
   private readonly apiUrl = 'http://localhost:3000/tasks';
 
   private readonly tasksSignal = signal<Task[]>([]);
-  private readonly selectedItemIdSignal = signal<number | null>(null);
   readonly isLoading = signal(false);
 
   readonly tasks = this.tasksSignal.asReadonly();
@@ -67,19 +66,11 @@ export class TodoService {
     this.http.delete<void>(`${this.apiUrl}/${id}`).subscribe({
       next: () => {
         this.tasksSignal.update((tasks) => tasks.filter((task) => task.id !== id));
-
-        if (this.selectedItemIdSignal() === id) {
-          this.selectedItemIdSignal.set(null);
-        }
       },
       error: (error) => {
         console.error('Ошибка удаления задачи:', error);
       },
     });
-  }
-
-  selectItem(id: number | null) {
-    this.selectedItemIdSignal.set(id);
   }
 
   changeStatus(id: number, status: TodoStatus) {

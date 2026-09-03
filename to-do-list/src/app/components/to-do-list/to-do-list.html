@@ -23,15 +23,11 @@
             tabindex="0"
             appTooltip="Показать описание"
             [routerLink]="['/tasks', task.id]"
-            [class.selected]="selectedTaskId() === task.id"
+            routerLinkActive="selected"
             [id]="task.id"
             [text]="task.text"
             [status]="task.status"
             (delete)="deleteTask(task.id)"
-            (statusChange)="changeStatus(task.id, $event)"
-            (keydown.enter)="selectTask(task.id)"
-            (keydown.space)="selectTask(task.id)"
-            (click)="selectTask(task.id)"
           ></li>
         }
       </ul>

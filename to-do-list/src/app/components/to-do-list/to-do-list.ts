@@ -12,9 +12,7 @@ import { Status } from '../../interfaces/status.interface';
 import { TodoStatus } from '../../type/todo-status.type';
 import { ToDoCreateItem } from '../to-do-create-item/to-do-create-item';
 import { ToDoSpinner } from '../to-do-spinner/to-do-spinner';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-to-do-list',
@@ -30,6 +28,7 @@ import { map } from 'rxjs';
     ToDoSpinner,
     RouterOutlet,
     RouterLink,
+    RouterLinkActive,
   ],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.css',
@@ -37,7 +36,6 @@ import { map } from 'rxjs';
 export class ToDoList implements OnInit {
   private readonly todoService = inject(TodoService);
   private readonly toastService = inject(ToastService);
-  private readonly route = inject(ActivatedRoute);
 
   selectedStatus = signal<TodoStatus | null>(null);
 
@@ -49,26 +47,6 @@ export class ToDoList implements OnInit {
 
   tasks = this.todoService.tasks;
   isLoading = this.todoService.isLoading;
-
-  readonly selectedTaskId = toSignal(
-    this.route.children[0]?.paramMap.pipe(
-      map((params) => {
-        const id = params.get('id');
-
-        if (id === null) {
-          return null;
-        }
-
-        const idNumber = Number(id);
-
-        if (Number.isNaN(idNumber)) {
-          return null;
-        }
-
-        return idNumber;
-      }),
-    ),
-  );
 
   ngOnInit() {
     this.todoService.getTasks();
@@ -91,9 +69,5 @@ export class ToDoList implements OnInit {
 
   changeStatus(id: number, status: TodoStatus) {
     this.todoService.changeStatus(id, status);
-  }
-
-  selectTask(id: number) {
-    this.todoService.selectItem(id);
   }
 }

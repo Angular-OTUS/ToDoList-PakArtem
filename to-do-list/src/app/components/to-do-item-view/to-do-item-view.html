@@ -1,25 +1,22 @@
 @let taskData = task();
+@let isCompleted = taskData.status === 'Completed';
+@let statusActionText = isCompleted ? 'Вернуть в работу' : 'Завершить задачу';
 
-@if (taskData) {
-  @let isCompleted = taskData.status === 'Completed';
-  @let statusActionText = isCompleted ? 'Вернуть в работу' : 'Завершить задачу';
+<div class="task-status">
+  <input
+    #statusCheckbox
+    class="cursor-pointer"
+    type="checkbox"
+    [appTooltip]="statusActionText"
+    [checked]="isCompleted"
+    (change)="onStatusChange(statusCheckbox.checked)"
+  />
 
-  <div class="task-status">
-    <input
-      #statusCheckbox
-      class="cursor-pointer"
-      type="checkbox"
-      [appTooltip]="statusActionText"
-      [checked]="isCompleted"
-      (change)="onStatusChange(statusCheckbox.checked)"
-    />
+  {{ statusActionText }}
+</div>
 
-    {{ statusActionText }}
-  </div>
+<hr />
 
-  <hr />
-
-  <div class="description-text">
-    {{ taskData.description }}
-  </div>
-}
+<div class="description-text">
+  {{ taskData.description }}
+</div>
