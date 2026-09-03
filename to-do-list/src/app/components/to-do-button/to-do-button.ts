@@ -4,7 +4,6 @@ import { Component, ElementRef, inject, input, output } from '@angular/core';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[app-button]',
   template: `<ng-content />`,
-  styleUrl: './to-do-button.css',
   host: {
     '(click)': 'onClick()',
     '[class.btn--add]': 'variant() === "add"',

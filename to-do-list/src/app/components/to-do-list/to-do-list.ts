@@ -12,6 +12,7 @@ import { Status } from '../../interfaces/status.interface';
 import { TodoStatus } from '../../type/todo-status.type';
 import { ToDoCreateItem } from '../to-do-create-item/to-do-create-item';
 import { ToDoSpinner } from '../to-do-spinner/to-do-spinner';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-to-do-list',
@@ -25,17 +26,18 @@ import { ToDoSpinner } from '../to-do-spinner/to-do-spinner';
     MatSelectModule,
     ToDoCreateItem,
     ToDoSpinner,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
   ],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.css',
 })
 export class ToDoList implements OnInit {
-  todoService = inject(TodoService);
-  toastService = inject(ToastService);
+  private readonly todoService = inject(TodoService);
+  private readonly toastService = inject(ToastService);
 
   selectedStatus = signal<TodoStatus | null>(null);
-
-  selectedItemId = this.todoService.selectedItemId;
 
   statuses: Status[] = [
     { value: null, viewValue: 'ALL' },
@@ -45,14 +47,6 @@ export class ToDoList implements OnInit {
 
   tasks = this.todoService.tasks;
   isLoading = this.todoService.isLoading;
-
-  selectedDescriptionTask = computed(() => {
-    const selectedId = this.selectedItemId();
-    if (selectedId === null) return;
-
-    const task = this.tasks().find((task) => task.id === selectedId);
-    return task ? task.description : 'Задача не найдена';
-  });
 
   ngOnInit() {
     this.todoService.getTasks();

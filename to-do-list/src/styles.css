@@ -58,3 +58,7 @@
 .btn--delete {
   background-color: #d94f43;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}

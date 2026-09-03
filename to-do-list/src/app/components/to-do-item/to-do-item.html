@@ -14,12 +14,14 @@
     Save
   </button>
 } @else {
-  @let itemStatus = status();
+  @let isCompleted = status() === 'Completed';
+
   <input
     #statusCheckbox
+    class="cursor-pointer"
     type="checkbox"
-    [checked]="itemStatus === 'Completed'"
-    [appTooltip]="itemStatus === 'Completed' ? 'Вернуть в работу' : 'Завершить задачу'"
+    [checked]="isCompleted"
+    [appTooltip]="isCompleted ? 'Вернуть в работу' : 'Завершить задачу'"
     (click)="$event.stopPropagation()"
     (dblclick)="$event.stopPropagation()"
     (change)="onStatusChange(statusCheckbox.checked)"
@@ -31,7 +33,7 @@
     type="button"
     class="btn"
     variant="delete"
-    (click)="delete.emit()"
+    (click)="deleteTask($event)"
   >
     Delete
   </button>

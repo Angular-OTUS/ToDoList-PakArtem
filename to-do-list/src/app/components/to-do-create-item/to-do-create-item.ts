@@ -16,8 +16,8 @@ import { ToDoButton } from '../to-do-button/to-do-button';
   styleUrl: './to-do-create-item.css',
 })
 export class ToDoCreateItem {
-  todoService = inject(TodoService);
-  toastService = inject(ToastService);
+  private readonly todoService = inject(TodoService);
+  private readonly toastService = inject(ToastService);
 
   model = {
     title: '',

@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.task-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.description-text {
+  text-wrap: wrap;
+  overflow-wrap: break-word;
+}
