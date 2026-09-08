@@ -1,0 +1,9 @@
+:host {
+  color: var(--text-primary);
+}
+
+.board {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}

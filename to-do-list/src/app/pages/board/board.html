@@ -1,0 +1,19 @@
+<div class="board" cdkDropListGroup>
+  <app-to-do-board-column
+    status="ToDo"
+    [tasks]="todo()"
+    (taskDrop)="drop($event)"
+  />
+
+  <app-to-do-board-column
+    status="InProgress"
+    [tasks]="inProgress()"
+    (taskDrop)="drop($event)"
+  />
+
+  <app-to-do-board-column
+    status="Completed"
+    [tasks]="completed()"
+    (taskDrop)="drop($event)"
+  />
+</div>

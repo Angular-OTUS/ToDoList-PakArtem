@@ -5,6 +5,13 @@
   box-sizing: border-box;
 }
 
+:root {
+  --text-primary: #ffffff;
+
+  --bg-main: #21212b;
+  --bg-active: #5147ba;
+}
+
 .app-tooltip {
   position: absolute;
   padding: 8px 12px;
@@ -61,4 +68,12 @@
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+a {
+  all: unset;
+}
+
+li {
+  all: unset;
 }

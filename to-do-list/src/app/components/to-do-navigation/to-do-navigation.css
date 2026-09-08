@@ -1,0 +1,18 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-primary);
+  font-size: 20px;
+}
+
+.link {
+  display: block;
+  margin-right: 5%;
+  padding-inline: 30px;
+  padding-block: 10px;
+  border-radius: 0 25px 25px 0;
+}
+
+.selected {
+  background-color: var(--bg-active);
+}

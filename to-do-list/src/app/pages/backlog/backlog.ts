@@ -1,39 +1,33 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { ToDoHeader } from '../to-do-header/to-do-header';
-import { FormsModule } from '@angular/forms';
-import { ToDoItem } from '../to-do-item/to-do-item';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TooltipDirective } from '../../directives/tooltip';
-import { TodoService } from '../../services/todo';
 import { ToastService } from '../../services/toast';
-import { MatSelectModule } from '@angular/material/select';
-import { Status } from '../../interfaces/status.interface';
+import { TodoService } from '../../services/todo';
 import { TodoStatus } from '../../type/todo-status.type';
-import { ToDoCreateItem } from '../to-do-create-item/to-do-create-item';
-import { ToDoSpinner } from '../to-do-spinner/to-do-spinner';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Status } from '../../interfaces/status.interface';
+import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
+import { ToDoItem } from '../../components/to-do-item/to-do-item';
+import { ToDoCreateItem } from '../../components/to-do-create-item/to-do-create-item';
+import { MatFormField, MatLabel } from '@angular/material/input';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-to-do-list',
+  selector: 'app-backlog',
   imports: [
-    ToDoHeader,
-    FormsModule,
-    ToDoItem,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    TooltipDirective,
-    MatSelectModule,
-    ToDoCreateItem,
-    ToDoSpinner,
-    RouterOutlet,
     RouterLink,
+    ToDoItem,
+    RouterOutlet,
+    ToDoCreateItem,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    MatOption,
+    FormsModule,
     RouterLinkActive,
   ],
-  templateUrl: './to-do-list.html',
-  styleUrl: './to-do-list.css',
+  templateUrl: './backlog.html',
+  styleUrl: './backlog.css',
 })
-export class ToDoList implements OnInit {
+export class Backlog implements OnInit {
   private readonly todoService = inject(TodoService);
   private readonly toastService = inject(ToastService);
 
@@ -41,6 +35,7 @@ export class ToDoList implements OnInit {
 
   statuses: Status[] = [
     { value: null, viewValue: 'ALL' },
+    { value: 'ToDo', viewValue: 'ToDo' },
     { value: 'InProgress', viewValue: 'In Progress' },
     { value: 'Completed', viewValue: 'Completed' },
   ];

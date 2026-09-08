@@ -4,19 +4,29 @@
       "id": 1,
       "text": "Task 1",
       "description": "description 1",
-      "status": "Completed"
+      "status": "InProgress",
+      "order": 0
     },
     {
       "text": "Task 2",
       "description": "description",
-      "status": "Completed",
-      "id": 2
+      "status": "ToDo",
+      "id": 2,
+      "order": 0
     },
     {
-      "text": "5435",
-      "description": "435345",
+      "text": "Task 3",
+      "description": "",
+      "status": "Completed",
+      "id": 3,
+      "order": 1
+    },
+    {
+      "text": "Task 4",
+      "description": "",
       "status": "InProgress",
-      "id": 3
+      "order": 1,
+      "id": 4
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

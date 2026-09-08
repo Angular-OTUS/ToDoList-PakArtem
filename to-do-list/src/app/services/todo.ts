@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Task } from '../interfaces/task.interface';
 import { TodoStatus } from '../type/todo-status.type';
-import { finalize } from 'rxjs';
+import { finalize, forkJoin } from 'rxjs';
 
 @Service()
 export class TodoService {
@@ -33,10 +33,17 @@ export class TodoService {
   }
 
   addTask(text: string, description: string) {
+    const tasks = this.tasksSignal();
+
+    const maxOrder = tasks.length
+      ? Math.max(...tasks.map(task => task.order))
+      : -1;
+
     const newTask: Omit<Task, 'id'> = {
       text,
       description,
-      status: 'InProgress',
+      status: 'ToDo',
+      order: maxOrder + 1,
     };
 
     this.http.post<Task>(this.apiUrl, newTask).subscribe({
@@ -82,6 +89,54 @@ export class TodoService {
       },
       error: (error) => {
         console.error('Ошибка изменения статуса:', error);
+      },
+    });
+  }
+
+  changeTaskOrder(tasks: Pick<Task, 'id' | 'order'>[]) {
+    const requests = tasks.map((task) =>
+      this.http.patch<Task>(
+        `${this.apiUrl}/${task.id}`,
+        { order: task.order },
+      ),
+    );
+
+    forkJoin(requests).subscribe({
+      next: (updatedTasks) => {
+        this.tasksSignal.update((currentTasks) =>
+          currentTasks.map((currentTask) => {
+            const updatedTask = updatedTasks.find(
+              (task) => task.id === currentTask.id,
+            );
+
+            return updatedTask
+              ? { ...currentTask, ...updatedTask }
+              : currentTask;
+          }),
+        );
+      },
+      error: (error) => {
+        console.error('Ошибка изменения order:', error);
+      },
+    });
+  }
+
+  updateTask(id: number, changes: Partial<Pick<Task, 'status' | 'order'>>) {
+    this.http.patch<Task>(
+      `${this.apiUrl}/${id}`,
+      changes,
+    ).subscribe({
+      next: (updatedTask) => {
+        this.tasksSignal.update(tasks =>
+          tasks.map(task =>
+            task.id === updatedTask.id
+              ? updatedTask
+              : task,
+          ),
+        );
+      },
+      error: (error) => {
+        console.error('Ошибка обновления задачи:', error);
       },
     });
   }

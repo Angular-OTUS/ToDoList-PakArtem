@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.backlog-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  height: 100%;
+  color: var(--text-primary);
+}
+
+.status-filter {
+  width: 100%;
+}
+
+.list-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 69vh;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 250px;
+  overflow-y: auto;
+}
+
+.selected {
+  background-color: var(--bg-active);
+}

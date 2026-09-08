@@ -5,4 +5,5 @@ export interface Task {
   text: string;
   description: string;
   status: TodoStatus | null;
+  order: number;
 }

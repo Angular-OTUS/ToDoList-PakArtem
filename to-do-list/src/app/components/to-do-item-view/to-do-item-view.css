@@ -12,4 +12,5 @@
 .description-text {
   text-wrap: wrap;
   overflow-wrap: break-word;
+  padding-top: 10px;
 }
