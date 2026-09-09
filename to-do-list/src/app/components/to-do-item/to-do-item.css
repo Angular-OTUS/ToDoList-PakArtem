@@ -12,3 +12,8 @@
 :host button {
   align-self: stretch;
 }
+
+.task-text {
+  overflow-x: auto;
+  padding-inline: 3px;
+}

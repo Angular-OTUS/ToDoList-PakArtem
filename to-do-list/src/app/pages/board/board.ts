@@ -9,6 +9,7 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { Task } from '../../interfaces/task.interface';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -27,40 +28,29 @@ export class Board implements OnInit {
     this.todoService.getTasks();
   }
 
-  todo = computed(() =>
-    [...this.tasks()]
-      .filter((t) => t.status === 'ToDo')
-      .sort((a, b) => a.order - b.order),
-  );
-
-  inProgress = computed(() =>
-    [...this.tasks()]
-      .filter((t) => t.status === 'InProgress')
-      .sort((a, b) => a.order - b.order),
-  );
-
-  completed = computed(() =>
-    [...this.tasks()]
-      .filter((t) => t.status === 'Completed')
-      .sort((a, b) => a.order - b.order),
+  columns = computed(() =>
+    this.statuses.map((status) => ({
+      status,
+      tasks: this.tasks()
+        .filter((t) => t.status === status)
+        .sort((a, b) => a.order - b.order),
+    })),
   );
 
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 
       const currentTasks = event.container.data.map((task, index) => ({
         ...task,
         order: index,
       }));
 
-      this.todoService.changeTaskOrder([
-        ...currentTasks,
-      ]);
+      this.todoService.changeTaskOrder(currentTasks).subscribe({
+        error: () => {
+          this.todoService.reloadTasks();
+        },
+      });
 
       return;
     }
@@ -82,14 +72,17 @@ export class Board implements OnInit {
       order: index,
     }));
 
-    this.todoService.changeTaskOrder([
-      ...previousTasks,
-      ...currentTasks,
-    ]);
-
     const task = event.item.data;
     const newStatus = event.container.id as TodoStatus;
 
-    this.todoService.changeStatus(task.id, newStatus);
+    forkJoin([
+      this.todoService.changeTaskOrder([...previousTasks, ...currentTasks]),
+
+      this.todoService.changeStatus(task.id, newStatus),
+    ]).subscribe({
+      error: () => {
+        this.todoService.reloadTasks();
+      },
+    });
   }
 }

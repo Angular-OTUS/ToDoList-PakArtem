@@ -35,9 +35,7 @@ export class TodoService {
   addTask(text: string, description: string) {
     const tasks = this.tasksSignal();
 
-    const maxOrder = tasks.length
-      ? Math.max(...tasks.map(task => task.order))
-      : -1;
+    const maxOrder = tasks.length ? Math.max(...tasks.map((task) => task.order)) : -1;
 
     const newTask: Omit<Task, 'id'> = {
       text,
@@ -81,63 +79,22 @@ export class TodoService {
   }
 
   changeStatus(id: number, status: TodoStatus) {
-    this.http.patch<Task>(`${this.apiUrl}/${id}`, { status }).subscribe({
-      next: (updatedTask) => {
-        this.tasksSignal.update((tasks) =>
-          tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
-        );
-      },
-      error: (error) => {
-        console.error('Ошибка изменения статуса:', error);
-      },
-    });
+    return this.http.patch<Task>(`${this.apiUrl}/${id}`, { status });
   }
 
   changeTaskOrder(tasks: Pick<Task, 'id' | 'order'>[]) {
-    const requests = tasks.map((task) =>
-      this.http.patch<Task>(
-        `${this.apiUrl}/${task.id}`,
-        { order: task.order },
+    return forkJoin(
+      tasks.map((task) =>
+        this.http.patch(`${this.apiUrl}/${task.id}`, {
+          order: task.order,
+        }),
       ),
     );
-
-    forkJoin(requests).subscribe({
-      next: (updatedTasks) => {
-        this.tasksSignal.update((currentTasks) =>
-          currentTasks.map((currentTask) => {
-            const updatedTask = updatedTasks.find(
-              (task) => task.id === currentTask.id,
-            );
-
-            return updatedTask
-              ? { ...currentTask, ...updatedTask }
-              : currentTask;
-          }),
-        );
-      },
-      error: (error) => {
-        console.error('Ошибка изменения order:', error);
-      },
-    });
   }
 
-  updateTask(id: number, changes: Partial<Pick<Task, 'status' | 'order'>>) {
-    this.http.patch<Task>(
-      `${this.apiUrl}/${id}`,
-      changes,
-    ).subscribe({
-      next: (updatedTask) => {
-        this.tasksSignal.update(tasks =>
-          tasks.map(task =>
-            task.id === updatedTask.id
-              ? updatedTask
-              : task,
-          ),
-        );
-      },
-      error: (error) => {
-        console.error('Ошибка обновления задачи:', error);
-      },
+  reloadTasks() {
+    this.http.get<Task[]>(this.apiUrl).subscribe((tasks) => {
+      this.tasksSignal.set(tasks);
     });
   }
 }
