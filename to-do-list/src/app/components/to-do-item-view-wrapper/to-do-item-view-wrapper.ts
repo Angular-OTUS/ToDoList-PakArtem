@@ -52,7 +52,9 @@ export class ToDoItemViewWrapper {
   onStatusChange(checked: boolean): void {
     const newStatus: TodoStatus = checked ? 'Completed' : 'InProgress';
 
-    this.todoService.changeStatus(this.taskId()!, newStatus);
+    this.todoService.changeStatus(this.taskId()!, newStatus).subscribe({
+      error: () => this.todoService.reloadTasks(),
+    });
 
     this.toastService.showToast(
       newStatus === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',

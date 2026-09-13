@@ -4,43 +4,29 @@
       "id": 1,
       "text": "Task 1",
       "description": "description 1",
-      "status": "ToDo",
-      "order": 0
+      "status": "Completed",
+      "order": 1
     },
     {
       "text": "Task 2",
       "description": "description",
       "status": "Completed",
       "id": 2,
-      "order": 2
+      "order": 0
     },
     {
       "text": "Task 3",
       "description": "",
-      "status": "Completed",
+      "status": "ToDo",
       "id": 3,
-      "order": 3
+      "order": 0
     },
     {
       "text": "Task 4",
       "description": "",
-      "status": "Completed",
+      "status": "InProgress",
       "order": 0,
       "id": 4
-    },
-    {
-      "text": "Task 21333333333333333333333311112 3esdfsdf",
-      "description": "",
-      "status": "ToDo",
-      "order": 1,
-      "id": 5
-    },
-    {
-      "text": "Task 4324sdfsdfrjhsdjkfrhjkasdhrfjkqweheuiorhqwiouehiu12312 2121",
-      "description": "",
-      "status": "Completed",
-      "order": 1,
-      "id": 6
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

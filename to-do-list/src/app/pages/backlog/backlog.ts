@@ -63,6 +63,8 @@ export class Backlog implements OnInit {
   }
 
   changeStatus(id: number, status: TodoStatus) {
-    this.todoService.changeStatus(id, status);
+    this.todoService.changeStatus(id, status).subscribe({
+      error: () => this.todoService.reloadTasks(),
+    });
   }
 }
