@@ -49,10 +49,10 @@ export class ToDoItemViewWrapper {
     return this.tasks().find((task) => Number(task.id) === id) ?? null;
   });
 
-  onStatusChange(checked: boolean): void {
+  onStatusChange(id: number, checked: boolean): void {
     const newStatus: TodoStatus = checked ? 'Completed' : 'InProgress';
 
-    this.todoService.changeStatus(this.taskId()!, newStatus).subscribe({
+    this.todoService.changeStatus(id, newStatus).subscribe({
       error: () => this.todoService.reloadTasks(),
     });
 
