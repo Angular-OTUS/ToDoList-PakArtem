@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Task } from '../interfaces/task.interface';
 import { TodoStatus } from '../type/todo-status.type';
-import { finalize } from 'rxjs';
+import { finalize, forkJoin } from 'rxjs';
 
 @Service()
 export class TodoService {
@@ -33,10 +33,15 @@ export class TodoService {
   }
 
   addTask(text: string, description: string) {
+    const tasks = this.tasksSignal();
+
+    const maxOrder = tasks.length ? Math.max(...tasks.map((task) => task.order)) : -1;
+
     const newTask: Omit<Task, 'id'> = {
       text,
       description,
-      status: 'InProgress',
+      status: 'ToDo',
+      order: maxOrder + 1,
     };
 
     this.http.post<Task>(this.apiUrl, newTask).subscribe({
@@ -74,15 +79,22 @@ export class TodoService {
   }
 
   changeStatus(id: number, status: TodoStatus) {
-    this.http.patch<Task>(`${this.apiUrl}/${id}`, { status }).subscribe({
-      next: (updatedTask) => {
-        this.tasksSignal.update((tasks) =>
-          tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
-        );
-      },
-      error: (error) => {
-        console.error('Ошибка изменения статуса:', error);
-      },
+    return this.http.patch<Task>(`${this.apiUrl}/${id}`, { status });
+  }
+
+  changeTaskOrder(tasks: Pick<Task, 'id' | 'order'>[]) {
+    return forkJoin(
+      tasks.map((task) =>
+        this.http.patch(`${this.apiUrl}/${task.id}`, {
+          order: task.order,
+        }),
+      ),
+    );
+  }
+
+  reloadTasks() {
+    this.http.get<Task[]>(this.apiUrl).subscribe((tasks) => {
+      this.tasksSignal.set(tasks);
     });
   }
 }

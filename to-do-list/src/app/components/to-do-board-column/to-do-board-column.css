@@ -1,0 +1,32 @@
+:host {
+  width: 300px;
+}
+
+.task-status {
+  margin-bottom: 10px;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-list.empty {
+  min-height: 42px;
+  background: var(--bg-main);
+  border-radius: 5px;
+}
+
+.task-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 15px;
+  background-color: var(--bg-main);
+  border-radius: 5px;
+  padding: 15px;
+  cursor: grabbing;
+  overflow-x: auto;
+}

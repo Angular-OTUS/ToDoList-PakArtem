@@ -1,1 +1,1 @@
-export type TodoStatus = 'InProgress' | 'Completed';
+export type TodoStatus = 'ToDo' | 'InProgress' | 'Completed';

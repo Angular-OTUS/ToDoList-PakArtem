@@ -1,0 +1,9 @@
+<div class="board" cdkDropListGroup>
+  @for (column of columns(); track column.status) {
+    <app-to-do-board-column
+      [status]="column.status"
+      [tasks]="column.tasks"
+      (taskDrop)="drop($event)"
+    />
+  }
+</div>

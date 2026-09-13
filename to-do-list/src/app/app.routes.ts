@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
-import { ToDoList } from './components/to-do-list/to-do-list';
 import { ToDoItemViewWrapper } from './components/to-do-item-view-wrapper/to-do-item-view-wrapper';
+import { Backlog } from './pages/backlog/backlog';
+import { Board } from './pages/board/board';
 
 export const routes: Routes = [
   {
@@ -9,8 +10,18 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'tasks',
-    component: ToDoList,
+    path: 'backlog',
+    component: Backlog,
+    children: [
+      {
+        path: ':id',
+        component: ToDoItemViewWrapper,
+      },
+    ],
+  },
+  {
+    path: 'board',
+    component: Board,
     children: [
       {
         path: ':id',

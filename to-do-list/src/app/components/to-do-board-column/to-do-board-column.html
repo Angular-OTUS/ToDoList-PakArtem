@@ -1,0 +1,16 @@
+<h3 class="task-status">{{ status() }} ({{ tasks().length }})</h3>
+
+<ul
+  class="task-list"
+  cdkDropList
+  [cdkDropListData]="tasks()"
+  [id]="status()"
+  (cdkDropListDropped)="taskDrop.emit($event)"
+  [class.empty]="tasks().length === 0"
+>
+  @for (task of tasks(); track task.id) {
+    <li class="task-item" cdkDrag [cdkDragData]="task" tabindex="0" [id]="task.id">
+      {{ task.text }}
+    </li>
+  }
+</ul>

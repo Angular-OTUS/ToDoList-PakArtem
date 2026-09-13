@@ -1,5 +1,8 @@
-@if(taskId() && task()){
-  <app-to-do-item-view [task]="task()!" (statusChange)="onStatusChange($event)" />
+@let taskData = task();
+@let id = taskId();
+
+@if (id && taskData) {
+  <app-to-do-item-view [task]="taskData" (statusChange)="onStatusChange(id, $event)" />
 } @else {
   <app-to-do-error-state />
 }
