@@ -1,9 +1,9 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { TextFieldModule } from '@angular/cdk/text-field';
 
-import { TodoService } from '../../services/todo';
+import { TodoStore } from '../../services/todo-store';
 import { ToastService } from '../../services/toast';
 
 import { TooltipDirective } from '../../directives/tooltip';
@@ -16,7 +16,7 @@ import { ToDoButton } from '../to-do-button/to-do-button';
   styleUrl: './to-do-create-item.css',
 })
 export class ToDoCreateItem {
-  private readonly todoService = inject(TodoService);
+  private readonly todoStore = inject(TodoStore);
   private readonly toastService = inject(ToastService);
 
   model = {
@@ -24,16 +24,17 @@ export class ToDoCreateItem {
     description: '',
   };
 
-  @ViewChild('todoForm') todoForm!: NgForm;
+  todoForm = viewChild<NgForm>('todoForm');
 
   addTask() {
     const title = (this.model.title || '').trim();
     const description = (this.model.description || '').trim();
 
-    this.todoService.addTask(title.trim(), description.trim());
+    this.todoStore.addTask(title, description).subscribe({
+      next: () => this.toastService.showToast('Добавлена задача!'),
+      error: () => this.toastService.showToast('Ошибка добавления задачи!'),
+    });
 
-    this.todoForm.resetForm();
-
-    this.toastService.showToast('Добавлена задача!');
+    this.todoForm()?.resetForm();
   }
 }

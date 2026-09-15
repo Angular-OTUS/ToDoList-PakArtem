@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-to-do-toast',
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './to-do-toast.html',
   styleUrl: './to-do-toast.css',
 })

@@ -1,11 +1,11 @@
 import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { TooltipDirective } from '../../directives/tooltip';
 import { MatInputModule } from '@angular/material/input';
-import { TodoService } from '../../services/todo';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../services/toast';
 import { TodoStatus } from '../../type/todo-status.type';
 import { ToDoButton } from '../to-do-button/to-do-button';
+import { TodoStore } from '../../services/todo-store';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -19,7 +19,7 @@ import { ToDoButton } from '../to-do-button/to-do-button';
   },
 })
 export class ToDoItem {
-  private readonly todoService = inject(TodoService);
+  private readonly todoStore = inject(TodoStore);
   private readonly toastService = inject(ToastService);
 
   id = input.required<number>();
@@ -43,9 +43,11 @@ export class ToDoItem {
   });
 
   onClick(): void {
-    this.todoService.editTask(this.id(), this.inputValue());
+    this.todoStore.editTask(this.id(), this.inputValue()).subscribe({
+      next: () => this.toastService.showToast('Задача изменена!'),
+      error: () => this.toastService.showToast('Ошибка изменения задачи!'),
+    });
     this.isEdit.set(false);
-    this.toastService.showToast('Задача изменена!');
   }
 
   onStatusChange(checked: boolean): void {

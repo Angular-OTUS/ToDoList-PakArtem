@@ -1,7 +1,6 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { ToDoBoardColumn } from '../../components/to-do-board-column/to-do-board-column';
 import { TodoStatus } from '../../type/todo-status.type';
-import { TodoService } from '../../services/todo';
 import {
   CdkDragDrop,
   CdkDropListGroup,
@@ -10,6 +9,8 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Task } from '../../interfaces/task.interface';
 import { forkJoin } from 'rxjs';
+import { TodoStore } from '../../services/todo-store';
+import { ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-board',
@@ -18,14 +19,15 @@ import { forkJoin } from 'rxjs';
   styleUrl: './board.css',
 })
 export class Board implements OnInit {
-  private readonly todoService = inject(TodoService);
+  private readonly todoStore = inject(TodoStore);
+  private readonly toastService = inject(ToastService);
 
   statuses: TodoStatus[] = ['ToDo', 'InProgress', 'Completed'];
 
-  tasks = this.todoService.tasks;
+  tasks = this.todoStore.tasks;
 
   ngOnInit() {
-    this.todoService.getTasks();
+    this.todoStore.getTasks().subscribe();
   }
 
   columns = computed(() =>
@@ -42,13 +44,17 @@ export class Board implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 
       const currentTasks = event.container.data.map((task, index) => ({
-        ...task,
+        id: task.id,
         order: index,
       }));
 
-      this.todoService.changeTaskOrder(currentTasks).subscribe({
+      this.todoStore.changeTaskOrder(currentTasks).subscribe({
+        next: () => {
+          this.toastService.showToast('Порядок задач обновлён!');
+        },
         error: () => {
-          this.todoService.reloadTasks();
+          this.toastService.showToast('Ошибка изменения порядка!');
+          this.todoStore.reloadTasks().subscribe();
         },
       });
 
@@ -76,12 +82,16 @@ export class Board implements OnInit {
     const newStatus = event.container.id as TodoStatus;
 
     forkJoin([
-      this.todoService.changeTaskOrder([...previousTasks, ...currentTasks]),
+      this.todoStore.changeTaskOrder([...previousTasks, ...currentTasks]),
 
-      this.todoService.changeStatus(task.id, newStatus),
+      this.todoStore.changeTaskStatus(task.id, newStatus),
     ]).subscribe({
+      next: () => {
+        this.toastService.showToast('Порядок задач обновлён!');
+      },
       error: () => {
-        this.todoService.reloadTasks();
+        this.toastService.showToast('Ошибка изменения порядка!');
+        this.todoStore.reloadTasks().subscribe();
       },
     });
   }

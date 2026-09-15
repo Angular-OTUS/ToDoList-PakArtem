@@ -1,5 +1,5 @@
 <div class="toast-container">
-  @for (toast of toastService.toasts(); track toast.id) {
+  @for (toast of toastService.toasts | async; track toast.id) {
     <span class="toast">
       {{ toast.message }}
     </span>

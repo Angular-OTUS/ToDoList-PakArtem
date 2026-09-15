@@ -4,9 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { ToDoItemView } from '../to-do-item-view/to-do-item-view';
 import { ToDoErrorState } from '../to-do-error-state/to-do-error-state';
-import { TodoService } from '../../services/todo';
+
 import { ToastService } from '../../services/toast';
 import { TodoStatus } from '../../type/todo-status.type';
+import { TodoStore } from '../../services/todo-store';
 
 @Component({
   selector: 'app-to-do-item-view-wrapper',
@@ -16,10 +17,10 @@ import { TodoStatus } from '../../type/todo-status.type';
 })
 export class ToDoItemViewWrapper {
   private readonly route = inject(ActivatedRoute);
-  private readonly todoService = inject(TodoService);
+  private readonly todoStore = inject(TodoStore);
   private readonly toastService = inject(ToastService);
 
-  readonly tasks = this.todoService.tasks;
+  readonly tasks = this.todoStore.tasks;
 
   taskId = toSignal(
     this.route.paramMap.pipe(
@@ -52,12 +53,12 @@ export class ToDoItemViewWrapper {
   onStatusChange(id: number, checked: boolean): void {
     const newStatus: TodoStatus = checked ? 'Completed' : 'InProgress';
 
-    this.todoService.changeStatus(id, newStatus).subscribe({
-      error: () => this.todoService.reloadTasks(),
+    this.todoStore.changeTaskStatus(id, newStatus).subscribe({
+      next: () =>
+        this.toastService.showToast(
+          newStatus === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
+        ),
+      error: () => this.todoStore.reloadTasks(),
     });
-
-    this.toastService.showToast(
-      newStatus === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
-    );
   }
 }
