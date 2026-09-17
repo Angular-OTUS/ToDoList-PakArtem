@@ -8,7 +8,7 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { Task } from '../../interfaces/task.interface';
-import { forkJoin } from 'rxjs';
+import { forkJoin, take } from 'rxjs';
 import { TodoStore } from '../../services/todo-store';
 import { ToastService } from '../../services/toast';
 
@@ -27,7 +27,7 @@ export class Board implements OnInit {
   tasks = this.todoStore.tasks;
 
   ngOnInit() {
-    this.todoStore.getTasks().subscribe();
+    this.todoStore.getTasks().pipe(take(1)).subscribe();
   }
 
   columns = computed(() =>
@@ -48,15 +48,18 @@ export class Board implements OnInit {
         order: index,
       }));
 
-      this.todoStore.changeTaskOrder(currentTasks).subscribe({
-        next: () => {
-          this.toastService.showToast('Порядок задач обновлён!');
-        },
-        error: () => {
-          this.toastService.showToast('Ошибка изменения порядка!');
-          this.todoStore.reloadTasks().subscribe();
-        },
-      });
+      this.todoStore
+        .changeTaskOrder(currentTasks)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.toastService.showToast('Порядок задач обновлён!');
+          },
+          error: () => {
+            this.toastService.showToast('Ошибка изменения порядка!');
+            this.todoStore.reloadTasks().pipe(take(1)).subscribe();
+          },
+        });
 
       return;
     }
@@ -85,14 +88,16 @@ export class Board implements OnInit {
       this.todoStore.changeTaskOrder([...previousTasks, ...currentTasks]),
 
       this.todoStore.changeTaskStatus(task.id, newStatus),
-    ]).subscribe({
-      next: () => {
-        this.toastService.showToast('Порядок задач обновлён!');
-      },
-      error: () => {
-        this.toastService.showToast('Ошибка изменения порядка!');
-        this.todoStore.reloadTasks().subscribe();
-      },
-    });
+    ])
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.toastService.showToast('Порядок задач обновлён!');
+        },
+        error: () => {
+          this.toastService.showToast('Ошибка изменения порядка!');
+          this.todoStore.reloadTasks().pipe(take(1)).subscribe();
+        },
+      });
   }
 }

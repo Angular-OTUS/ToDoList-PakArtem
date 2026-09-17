@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { ToDoItemView } from '../to-do-item-view/to-do-item-view';
 import { ToDoErrorState } from '../to-do-error-state/to-do-error-state';
 
@@ -53,12 +53,15 @@ export class ToDoItemViewWrapper {
   onStatusChange(id: number, checked: boolean): void {
     const newStatus: TodoStatus = checked ? 'Completed' : 'InProgress';
 
-    this.todoStore.changeTaskStatus(id, newStatus).subscribe({
-      next: () =>
-        this.toastService.showToast(
-          newStatus === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
-        ),
-      error: () => this.todoStore.reloadTasks(),
-    });
+    this.todoStore
+      .changeTaskStatus(id, newStatus)
+      .pipe(take(1))
+      .subscribe({
+        next: () =>
+          this.toastService.showToast(
+            newStatus === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
+          ),
+        error: () => this.todoStore.reloadTasks().pipe(take(1)),
+      });
   }
 }

@@ -9,6 +9,7 @@ import { MatFormField, MatLabel } from '@angular/material/input';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { TodoStore } from '../../services/todo-store';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-backlog',
@@ -44,10 +45,13 @@ export class Backlog implements OnInit {
   isLoading = this.todoStore.isLoading;
 
   ngOnInit() {
-    this.todoStore.getTasks().subscribe({
-      next: () => this.toastService.showToast('Задачи успешно загружены!'),
-      error: () => this.toastService.showToast('Не удалось загрузить задачи!'),
-    });
+    this.todoStore
+      .getTasks()
+      .pipe(take(1))
+      .subscribe({
+        next: () => this.toastService.showToast('Задачи успешно загружены!'),
+        error: () => this.toastService.showToast('Не удалось загрузить задачи!'),
+      });
   }
 
   filteredTasks = computed(() => {
@@ -61,19 +65,30 @@ export class Backlog implements OnInit {
   });
 
   deleteTask(id: number) {
-    this.todoStore.deleteTask(id).subscribe({
-      next: () => this.toastService.showToast('Задача удалена!'),
-      error: () => this.toastService.showToast('Ошибка удаления'),
-    });
+    this.todoStore
+      .deleteTask(id)
+      .pipe(take(1))
+      .subscribe({
+        next: () => this.toastService.showToast('Задача удалена!'),
+        error: () => this.toastService.showToast('Ошибка удаления'),
+      });
   }
 
   changeStatus(id: number, status: TodoStatus) {
-  this.todoStore.changeTaskStatus(id, status).subscribe({
-    next: () => this.toastService.showToast('Статус изменён!'),
-    error: () => {
-      this.todoStore.reloadTasks().subscribe();
-      this.toastService.showToast('Ошибка изменения статуса!');
-    },
-  });
-}
+    this.todoStore
+      .changeTaskStatus(id, status)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.toastService.showToast('Статус изменён!');
+          this.toastService.showToast(
+            status === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
+          );
+        },
+        error: () => {
+          this.todoStore.reloadTasks().subscribe();
+          this.toastService.showToast('Ошибка изменения статуса!');
+        },
+      });
+  }
 }

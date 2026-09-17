@@ -10,7 +10,7 @@
     {
       "text": "Task 2",
       "description": "description",
-      "status": "ToDo",
+      "status": "InProgress",
       "id": 2,
       "order": 0
     },

@@ -8,6 +8,7 @@ import { ToastService } from '../../services/toast';
 
 import { TooltipDirective } from '../../directives/tooltip';
 import { ToDoButton } from '../to-do-button/to-do-button';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-to-do-create-item',
@@ -30,11 +31,13 @@ export class ToDoCreateItem {
     const title = (this.model.title || '').trim();
     const description = (this.model.description || '').trim();
 
-    this.todoStore.addTask(title, description).subscribe({
-      next: () => this.toastService.showToast('Добавлена задача!'),
-      error: () => this.toastService.showToast('Ошибка добавления задачи!'),
-    });
-
-    this.todoForm()?.resetForm();
+    this.todoStore
+      .addTask(title, description)
+      .pipe(take(1))
+      .subscribe({
+        next: () => this.toastService.showToast('Добавлена задача!'),
+        error: () => this.toastService.showToast('Ошибка добавления задачи!'),
+        complete: () => this.todoForm()?.resetForm(),
+      });
   }
 }

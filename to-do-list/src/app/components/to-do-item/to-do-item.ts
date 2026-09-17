@@ -6,6 +6,8 @@ import { ToastService } from '../../services/toast';
 import { TodoStatus } from '../../type/todo-status.type';
 import { ToDoButton } from '../to-do-button/to-do-button';
 import { TodoStore } from '../../services/todo-store';
+import { take } from 'rxjs';
+import { Task } from '../../interfaces/task.interface';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -22,10 +24,8 @@ export class ToDoItem {
   private readonly todoStore = inject(TodoStore);
   private readonly toastService = inject(ToastService);
 
-  id = input.required<number>();
-  text = input.required<string>();
-  status = input<TodoStatus | null>('InProgress');
-
+  task = input.required<Task>();
+  isCompleted = signal<boolean>(false);
   inputValue = signal('');
   isEdit = signal<boolean>(false);
 
@@ -34,7 +34,10 @@ export class ToDoItem {
 
   constructor() {
     effect(() => {
-      this.inputValue.set(this.text());
+      const task = this.task();
+
+      this.inputValue.set(task.text);
+      this.isCompleted.set(task.status === 'Completed');
     });
   }
 
@@ -43,10 +46,13 @@ export class ToDoItem {
   });
 
   onClick(): void {
-    this.todoStore.editTask(this.id(), this.inputValue()).subscribe({
-      next: () => this.toastService.showToast('Задача изменена!'),
-      error: () => this.toastService.showToast('Ошибка изменения задачи!'),
-    });
+    this.todoStore
+      .editTask(this.task().id, this.inputValue())
+      .pipe(take(1))
+      .subscribe({
+        next: () => this.toastService.showToast('Задача изменена!'),
+        error: () => this.toastService.showToast('Ошибка изменения задачи!'),
+      });
     this.isEdit.set(false);
   }
 
@@ -54,10 +60,6 @@ export class ToDoItem {
     const newStatus: TodoStatus = checked ? 'Completed' : 'InProgress';
 
     this.statusChange.emit(newStatus);
-
-    this.toastService.showToast(
-      newStatus === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
-    );
   }
 
   deleteTask(event: MouseEvent) {

@@ -14,20 +14,18 @@
     Save
   </button>
 } @else {
-  @let isCompleted = status() === 'Completed';
-
   <input
     #statusCheckbox
     class="cursor-pointer"
     type="checkbox"
-    [checked]="isCompleted"
-    [appTooltip]="isCompleted ? 'Вернуть в работу' : 'Завершить задачу'"
+    [(ngModel)]="isCompleted"
+    [appTooltip]="isCompleted() ? 'Вернуть в работу' : 'Завершить задачу'"
     (click)="$event.stopPropagation()"
     (dblclick)="$event.stopPropagation()"
     (change)="onStatusChange(statusCheckbox.checked)"
   />
   <span class="task-text">
-    {{ text() }}
+    {{ task().text }}
   </span>
   <button
     app-button
