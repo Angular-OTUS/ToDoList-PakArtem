@@ -10,20 +10,20 @@
     {
       "text": "Task 2",
       "description": "description",
-      "status": "Completed",
+      "status": "InProgress",
       "id": 2,
       "order": 0
     },
     {
       "text": "Task 3",
       "description": "",
-      "status": "ToDo",
+      "status": "Completed",
       "id": 3,
       "order": 0
     },
     {
       "text": "Task 4",
-      "description": "",
+      "description": "sadasd",
       "status": "InProgress",
       "order": 0,
       "id": 4

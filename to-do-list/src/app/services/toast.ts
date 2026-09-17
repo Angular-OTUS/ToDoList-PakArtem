@@ -1,4 +1,5 @@
-import { Service, signal } from '@angular/core';
+import { Service } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Toast {
@@ -8,15 +9,15 @@ interface Toast {
 
 @Service()
 export class ToastService {
-  private readonly _toasts = signal<Toast[]>([]);
+  private readonly _toasts = new BehaviorSubject<Toast[]>([]);
 
-  readonly toasts = this._toasts.asReadonly();
+  readonly toasts = this._toasts.asObservable();
 
   showToast(message: string, duration = 3000): void {
     const id = uuidv4();
 
-    this._toasts.update((toasts) => [
-      ...toasts,
+    this._toasts.next([
+      ...this._toasts.value,
       {
         id,
         message,
@@ -24,7 +25,7 @@ export class ToastService {
     ]);
 
     setTimeout(() => {
-      this._toasts.update((toasts) => toasts.filter((toast) => toast.id !== id));
+      this._toasts.next(this._toasts.value.filter((toast) => toast.id !== id));
     }, duration);
   }
 }

@@ -1,11 +1,13 @@
 import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { TooltipDirective } from '../../directives/tooltip';
 import { MatInputModule } from '@angular/material/input';
-import { TodoService } from '../../services/todo';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../services/toast';
 import { TodoStatus } from '../../type/todo-status.type';
 import { ToDoButton } from '../to-do-button/to-do-button';
+import { TodoStore } from '../../services/todo-store';
+import { take } from 'rxjs';
+import { Task } from '../../interfaces/task.interface';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -19,13 +21,11 @@ import { ToDoButton } from '../to-do-button/to-do-button';
   },
 })
 export class ToDoItem {
-  private readonly todoService = inject(TodoService);
+  private readonly todoStore = inject(TodoStore);
   private readonly toastService = inject(ToastService);
 
-  id = input.required<number>();
-  text = input.required<string>();
-  status = input<TodoStatus | null>('InProgress');
-
+  task = input.required<Task>();
+  isCompleted = signal<boolean>(false);
   inputValue = signal('');
   isEdit = signal<boolean>(false);
 
@@ -34,7 +34,10 @@ export class ToDoItem {
 
   constructor() {
     effect(() => {
-      this.inputValue.set(this.text());
+      const task = this.task();
+
+      this.inputValue.set(task.text);
+      this.isCompleted.set(task.status === 'Completed');
     });
   }
 
@@ -43,19 +46,20 @@ export class ToDoItem {
   });
 
   onClick(): void {
-    this.todoService.editTask(this.id(), this.inputValue());
+    this.todoStore
+      .editTask(this.task().id, this.inputValue())
+      .pipe(take(1))
+      .subscribe({
+        next: () => this.toastService.showToast('Задача изменена!'),
+        error: () => this.toastService.showToast('Ошибка изменения задачи!'),
+      });
     this.isEdit.set(false);
-    this.toastService.showToast('Задача изменена!');
   }
 
   onStatusChange(checked: boolean): void {
     const newStatus: TodoStatus = checked ? 'Completed' : 'InProgress';
 
     this.statusChange.emit(newStatus);
-
-    this.toastService.showToast(
-      newStatus === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
-    );
   }
 
   deleteTask(event: MouseEvent) {
