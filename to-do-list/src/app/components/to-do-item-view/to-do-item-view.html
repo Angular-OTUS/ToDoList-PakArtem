@@ -1,6 +1,6 @@
 @let taskData = task();
 @let isCompleted = taskData.status === 'Completed';
-@let statusActionText = isCompleted ? 'Вернуть в работу' : 'Завершить задачу';
+@let statusActionText = isCompleted ? returnToProgress : completeTask;
 
 <div class="task-status">
   <input

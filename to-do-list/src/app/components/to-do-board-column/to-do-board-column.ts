@@ -14,4 +14,15 @@ export class ToDoBoardColumn {
   tasks = input.required<Task[]>();
 
   taskDrop = output<CdkDragDrop<Task[]>>();
+
+  getStatusLabel(status: TodoStatus): string {
+    switch (status) {
+      case 'ToDo':
+        return $localize`:@@toDoStatus:ToDo`;
+      case 'InProgress':
+        return $localize`:@@inProgressStatus:In Progress`;
+      case 'Completed':
+        return $localize`:@@completedStatus:Completed`;
+    }
+  }
 }

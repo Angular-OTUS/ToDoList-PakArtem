@@ -13,6 +13,10 @@ export class ToDoItemView {
 
   readonly statusChange = output<boolean>();
 
+  readonly returnToProgress = $localize`:@@returnToProgress:Return to Progress`;
+
+  readonly completeTask = $localize`:@@completeTask:Complete Task`;
+
   onStatusChange(checked: boolean): void {
     this.statusChange.emit(checked);
   }

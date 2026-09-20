@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ToDoToast } from './components/to-do-toast/to-do-toast';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { ToDoSidebar } from './components/to-do-sidebar/to-do-sidebar';
@@ -14,8 +14,6 @@ import { filter, map } from 'rxjs';
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('to-do-list');
-
   private readonly router = inject(Router);
 
   readonly currentPage = toSignal(

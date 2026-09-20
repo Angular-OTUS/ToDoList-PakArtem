@@ -41,6 +41,9 @@ export class ToDoItem {
     });
   }
 
+  readonly returnToProgress = $localize`:@@returnToProgress:Return to Progress`;
+  readonly completeTask = $localize`:@@completeTask:Complete Task`;
+
   isInputEmpty = computed(() => {
     return this.inputValue().trim().length === 0;
   });
@@ -50,8 +53,9 @@ export class ToDoItem {
       .editTask(this.task().id, this.inputValue())
       .pipe(take(1))
       .subscribe({
-        next: () => this.toastService.showToast('Задача изменена!'),
-        error: () => this.toastService.showToast('Ошибка изменения задачи!'),
+        next: () => this.toastService.showToast($localize`:@@taskUpdated:Task updated!`),
+        error: () =>
+          this.toastService.showToast($localize`:@@taskUpdateError:Failed to update task!`),
       });
     this.isEdit.set(false);
   }

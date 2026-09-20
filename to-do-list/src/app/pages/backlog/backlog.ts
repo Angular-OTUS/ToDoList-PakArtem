@@ -35,10 +35,10 @@ export class Backlog implements OnInit {
   selectedStatus = signal<TodoStatus | null>(null);
 
   statuses: Status[] = [
-    { value: null, viewValue: 'ALL' },
-    { value: 'ToDo', viewValue: 'ToDo' },
-    { value: 'InProgress', viewValue: 'In Progress' },
-    { value: 'Completed', viewValue: 'Completed' },
+    { value: null, viewValue: $localize`:@@allStatus:ALL` },
+    { value: 'ToDo', viewValue: $localize`:@@toDoStatus:ToDo` },
+    { value: 'InProgress', viewValue: $localize`:@@inProgressStatus:In Progress` },
+    { value: 'Completed', viewValue: $localize`:@@completedStatus:Completed` },
   ];
 
   tasks = this.todoStore.tasks;
@@ -49,8 +49,10 @@ export class Backlog implements OnInit {
       .getTasks()
       .pipe(take(1))
       .subscribe({
-        next: () => this.toastService.showToast('Задачи успешно загружены!'),
-        error: () => this.toastService.showToast('Не удалось загрузить задачи!'),
+        next: () =>
+          this.toastService.showToast($localize`:@@tasksLoaded:Tasks loaded successfully!`),
+        error: () =>
+          this.toastService.showToast($localize`:@@tasksLoadError:Failed to load tasks!`),
       });
   }
 
@@ -69,8 +71,9 @@ export class Backlog implements OnInit {
       .deleteTask(id)
       .pipe(take(1))
       .subscribe({
-        next: () => this.toastService.showToast('Задача удалена!'),
-        error: () => this.toastService.showToast('Ошибка удаления'),
+        next: () => this.toastService.showToast($localize`:@@taskDeleted:Task deleted!`),
+        error: () =>
+          this.toastService.showToast($localize`:@@taskDeletedError:Failed to delete task!`),
       });
   }
 
@@ -80,14 +83,18 @@ export class Backlog implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.toastService.showToast('Статус изменён!');
+          this.toastService.showToast($localize`:@@statusUpdated:Status updated!`);
           this.toastService.showToast(
-            status === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
+            status === 'Completed'
+              ? $localize`:@@taskCompleted:Task completed!`
+              : $localize`:@@taskReturnedToProgress:Task returned to progress!`,
           );
         },
         error: () => {
           this.todoStore.reloadTasks().subscribe();
-          this.toastService.showToast('Ошибка изменения статуса!');
+          this.toastService.showToast(
+            $localize`:@@statusUpdateError:Failed to update task status!`,
+          );
         },
       });
   }

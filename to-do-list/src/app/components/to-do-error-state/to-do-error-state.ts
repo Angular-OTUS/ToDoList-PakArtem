@@ -7,5 +7,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './to-do-error-state.css',
 })
 export class ToDoErrorState {
-  readonly textError = input<string>('Что-то пошло не так!😔');
+  readonly textError = input<string>($localize`:@@somethingWentWrong:Something went wrong!😔`);
 }

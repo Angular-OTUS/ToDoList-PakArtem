@@ -53,10 +53,12 @@ export class Board implements OnInit {
         .pipe(take(1))
         .subscribe({
           next: () => {
-            this.toastService.showToast('Порядок задач обновлён!');
+            this.toastService.showToast($localize`:@@taskOrderUpdated:Task order updated!`);
           },
           error: () => {
-            this.toastService.showToast('Ошибка изменения порядка!');
+            this.toastService.showToast(
+              $localize`:@@taskOrderUpdateError:Failed to update task order!`,
+            );
             this.todoStore.reloadTasks().pipe(take(1)).subscribe();
           },
         });
@@ -92,10 +94,12 @@ export class Board implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.toastService.showToast('Порядок задач обновлён!');
+          this.toastService.showToast($localize`:@@taskOrderUpdated:Task order updated!`);
         },
         error: () => {
-          this.toastService.showToast('Ошибка изменения порядка!');
+          this.toastService.showToast(
+            $localize`:@@taskOrderUpdateError:Failed to update task order!`,
+          );
           this.todoStore.reloadTasks().pipe(take(1)).subscribe();
         },
       });

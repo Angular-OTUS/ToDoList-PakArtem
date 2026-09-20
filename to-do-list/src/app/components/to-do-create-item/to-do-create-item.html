@@ -6,6 +6,7 @@
         name="title"
         matInput
         placeholder="Add your new todo"
+        i18n-placeholder="@@addTodoPlaceholder"
         [(ngModel)]="model.title"
         required
       />
@@ -17,6 +18,7 @@
         name="description"
         matInput
         placeholder="Description"
+        i18n-placeholder="@@descriptionPlaceholder"
         subscriptSizing="dynamic"
         cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
@@ -27,7 +29,9 @@
 
   <button
     app-button
-    appTooltip="Добавить задачу"
+    appTooltip="Add Task"
+    i18n-appTooltip="@@addTaskTooltip"
+    i18n="@@addTask"
     type="submit"
     class="btn"
     variant="add"

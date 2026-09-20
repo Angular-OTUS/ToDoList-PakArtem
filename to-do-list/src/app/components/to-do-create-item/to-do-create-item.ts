@@ -35,8 +35,8 @@ export class ToDoCreateItem {
       .addTask(title, description)
       .pipe(take(1))
       .subscribe({
-        next: () => this.toastService.showToast('Добавлена задача!'),
-        error: () => this.toastService.showToast('Ошибка добавления задачи!'),
+        next: () => this.toastService.showToast($localize`:@@taskAdded:Task added!`),
+        error: () => this.toastService.showToast($localize`:@@taskAddError:Failed to add task!`),
         complete: () => this.todoForm()?.resetForm(),
       });
   }
