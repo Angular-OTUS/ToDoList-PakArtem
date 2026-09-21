@@ -1,0 +1,13 @@
+<nav>
+  @for (locale of locales; track locale.code) {
+    <button
+      app-button
+      [class.active]="isActive(locale.code)"
+      [disabled]="isActive(locale.code)"
+      (click)="switchLocale(locale.url)"
+      variant="active"
+    >
+      {{ locale.titel }}
+    </button>
+  }
+</nav>

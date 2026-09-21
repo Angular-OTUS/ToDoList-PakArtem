@@ -1,5 +1,21 @@
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 30px;
+  width: 100%;
+  min-height: 64px;
   color: var(--text-primary);
   background-color: var(--bg-main);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+app-to-do-language-switcher {
+  margin-left: auto;
 }

@@ -1,28 +1,37 @@
 import { Component, inject } from '@angular/core';
 import { ToDoToast } from './components/to-do-toast/to-do-toast';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRouteSnapshot, ActivationEnd, Router, RouterOutlet } from '@angular/router';
 import { ToDoSidebar } from './components/to-do-sidebar/to-do-sidebar';
 import { ToDoContainer } from './components/to-do-container/to-do-container';
 import { ToDoHeader } from './components/to-do-header/to-do-header';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { filter, map } from 'rxjs';
+import { distinctUntilChanged, filter, map } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [ToDoToast, RouterOutlet, ToDoSidebar, ToDoContainer, ToDoHeader],
+  imports: [ToDoToast, RouterOutlet, ToDoSidebar, ToDoContainer, ToDoHeader, AsyncPipe],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
   private readonly router = inject(Router);
 
-  readonly currentPage = toSignal(
-    this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd),
-      map((event) => event.urlAfterRedirects.split('/')[1] ?? ''),
-    ),
-    {
-      initialValue: this.router.url.split('/')[1] ?? '',
-    },
+  readonly currentPage = this.router.events.pipe(
+    filter((e): e is ActivationEnd => e instanceof ActivationEnd),
+    map((e) => this.getDeepestRouteTitle(e.snapshot)),
+    distinctUntilChanged(),
   );
+
+  private getDeepestRouteTitle(route: ActivatedRouteSnapshot): string {
+    if (route.children.length === 0) {
+      return route.data['titleKey'];
+    }
+    for (const child of route.children) {
+      const nested = this.getDeepestRouteTitle(child);
+      if (nested) {
+        return nested;
+      }
+    }
+    return route.data['titleKey'];
+  }
 }

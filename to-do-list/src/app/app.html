@@ -3,7 +3,7 @@
     <app-to-do-sidebar />
 
     <main class="content">
-      <app-to-do-header>{{ currentPage() }}</app-to-do-header>
+      <app-to-do-header [showLanguageSwitcher]="true">{{ currentPage | async }}</app-to-do-header>
       <div class="outlet-wrapper">
         <router-outlet />
       </div>

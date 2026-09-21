@@ -2,6 +2,34 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="navigationBacklog" datatype="html">
+        <source>Backlog</source>
+        <target>Список задач</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="navigationTaskDetail" datatype="html">
+        <source>TaskDetail</source>
+        <target>Детали задачи</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="navigationBoard" datatype="html">
+        <source>Board</source>
+        <target>Доска</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="addTodoPlaceholder" datatype="html">
         <source>Add your new todo</source>
         <target>Добавьте новую задачу</target>
