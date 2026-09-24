@@ -1,5 +1,6 @@
 import { Component, inject, LOCALE_ID } from '@angular/core';
 import { ToDoButton } from '../to-do-button/to-do-button';
+import { LOCALE_CONFIG } from '../../services/locale-config';
 
 @Component({
   selector: 'app-to-do-language-switcher',
@@ -9,17 +10,18 @@ import { ToDoButton } from '../to-do-button/to-do-button';
 })
 export class ToDoLanguageSwitcher {
   private readonly currentLocale = inject(LOCALE_ID);
+  private readonly localeConfig = inject(LOCALE_CONFIG);
 
   locales = [
     {
       code: 'ru',
-      titel: 'Русский',
-      url: 'http://localhost:4201',
+      title: 'Русский',
+      url: this.localeConfig.ru,
     },
     {
       code: 'en-US',
-      titel: 'English',
-      url: 'http://localhost:4200',
+      title: 'English',
+      url: this.localeConfig.en,
     },
   ];
 
