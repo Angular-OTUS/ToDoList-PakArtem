@@ -3,7 +3,11 @@
     <ng-content />
   </div>
 
-  @if (showLanguageSwitcher()) {
-    <app-to-do-language-switcher />
-  }
+  <div class="wrapper-controllers">
+    @if (showLanguageSwitcher()) {
+      <app-to-do-language-switcher />
+    }
+
+    <app-to-do-auth-actions />
+  </div>
 </header>

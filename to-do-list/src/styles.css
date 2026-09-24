@@ -74,10 +74,41 @@
   cursor: pointer;
 }
 
-a {
+input[app-checkbox] {
+  appearance: none;
+
+  width: 20px;
+  height: 20px;
+
+  border: 2px solid #aaa;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+input[app-checkbox]:checked {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #4caf50;
+  border-color: #4caf50;
+}
+
+input[app-checkbox]:checked::after {
+  content: '✓';
+  display: block;
+  color: white;
+  text-align: center;
+  line-height: 16px;
+}
+
+a,
+li,
+input,
+button {
   all: unset;
 }
 
-li {
-  all: unset;
+.text-purple {
+  color: var(--bg-active);
 }

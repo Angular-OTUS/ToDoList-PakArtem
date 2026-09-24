@@ -14,6 +14,10 @@ export class TodoApi {
     return this.http.get<Task[]>(this.apiUrl);
   }
 
+  getTask(id: number): Observable<Task> {
+    return this.http.get<Task>(`${this.apiUrl}/${id}`);
+  }
+
   addTask(task: Omit<Task, 'id'>): Observable<Task> {
     return this.http.post<Task>(this.apiUrl, task);
   }

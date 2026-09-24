@@ -1,7 +1,6 @@
 import { Component, ElementRef, inject, input, output } from '@angular/core';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[app-button]',
   template: `<ng-content />`,
   host: {
