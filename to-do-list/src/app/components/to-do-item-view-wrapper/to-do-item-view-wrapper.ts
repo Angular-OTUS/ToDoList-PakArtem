@@ -59,7 +59,9 @@ export class ToDoItemViewWrapper {
       .subscribe({
         next: () =>
           this.toastService.showToast(
-            newStatus === 'Completed' ? 'Задача выполнена!' : 'Задача возвращена в работу!',
+            newStatus === 'Completed'
+              ? $localize`:@@taskCompleted:Task completed!`
+              : $localize`:@@taskReturnedToProgress:Task returned to progress!`,
           ),
         error: () => this.todoStore.reloadTasks().pipe(take(1)),
       });

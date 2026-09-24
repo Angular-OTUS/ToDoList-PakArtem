@@ -8,11 +8,12 @@ import { Component, ElementRef, inject, input, output } from '@angular/core';
     '(click)': 'onClick()',
     '[class.btn--add]': 'variant() === "add"',
     '[class.btn--delete]': 'variant() === "delete"',
+    '[class.btn--active]': 'variant() === "active"',
   },
 })
 export class ToDoButton {
   private readonly elementRef = inject(ElementRef<HTMLButtonElement>);
-  readonly variant = input<'add' | 'delete'>('add');
+  readonly variant = input<'add' | 'delete' | 'active'>('add');
 
   readonly clicked = output<void>();
 

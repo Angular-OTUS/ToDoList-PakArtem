@@ -1,3 +1,9 @@
-<h1 class="header">
-  <ng-content />
-</h1>
+<header class="header">
+  <div class="title">
+    <ng-content />
+  </div>
+
+  @if (showLanguageSwitcher()) {
+    <app-to-do-language-switcher />
+  }
+</header>

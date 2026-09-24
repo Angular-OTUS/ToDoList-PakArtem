@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="navigationBacklog" datatype="html">
+        <source>Backlog</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="navigationTaskDetail" datatype="html">
+        <source>TaskDetail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="navigationBoard" datatype="html">
+        <source>Board</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="addTodoPlaceholder" datatype="html">
+        <source>Add your new todo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-create-item/to-do-create-item.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="descriptionPlaceholder" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-create-item/to-do-create-item.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="addTaskTooltip" datatype="html">
+        <source>Add Task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-create-item/to-do-create-item.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="addTask" datatype="html">
+        <source> Add task </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-create-item/to-do-create-item.html</context>
+          <context context-type="linenumber">40,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="taskAdded" datatype="html">
+        <source>Task added!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-create-item/to-do-create-item.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="taskAddError" datatype="html">
+        <source>Failed to add task!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-create-item/to-do-create-item.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="somethingWentWrong" datatype="html">
+        <source>Something went wrong!😔</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-error-state/to-do-error-state.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="taskCompleted" datatype="html">
+        <source>Task completed!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item-view-wrapper/to-do-item-view-wrapper.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="taskReturnedToProgress" datatype="html">
+        <source>Task returned to progress!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item-view-wrapper/to-do-item-view-wrapper.ts</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="returnToProgress" datatype="html">
+        <source>Return to Progress</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item-view/to-do-item-view.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item/to-do-item.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="completeTask" datatype="html">
+        <source>Complete Task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item-view/to-do-item-view.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item/to-do-item.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editTaskTooltip" datatype="html">
+        <source>Edit Task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item/to-do-item.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="save" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item/to-do-item.html</context>
+          <context context-type="linenumber">16,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deleteTaskTooltip" datatype="html">
+        <source>Delete Task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item/to-do-item.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delete" datatype="html">
+        <source> Delete </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item/to-do-item.html</context>
+          <context context-type="linenumber">42,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="taskUpdated" datatype="html">
+        <source>Task updated!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item/to-do-item.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="taskUpdateError" datatype="html">
+        <source>Failed to update task!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/to-do-item/to-do-item.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="showDescription" datatype="html">
+        <source>Show description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="allStatus" datatype="html">
+        <source>ALL</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="toDoStatus" datatype="html">
+        <source>ToDo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="inProgressStatus" datatype="html">
+        <source>In Progress</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="completedStatus" datatype="html">
+        <source>Completed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="tasksLoaded" datatype="html">
+        <source>Tasks loaded successfully!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="tasksLoadError" datatype="html">
+        <source>Failed to load tasks!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="taskDeleted" datatype="html">
+        <source>Task deleted!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="taskDeletedError" datatype="html">
+        <source>Failed to delete task!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="statusUpdated" datatype="html">
+        <source>Status updated!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="statusUpdateError" datatype="html">
+        <source>Failed to update task status!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backlog/backlog.ts</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="taskOrderUpdated" datatype="html">
+        <source>Task order updated!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/board/board.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/board/board.ts</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="taskOrderUpdateError" datatype="html">
+        <source>Failed to update task order!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/board/board.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/board/board.ts</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

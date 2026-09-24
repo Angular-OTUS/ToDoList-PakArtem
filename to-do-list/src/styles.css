@@ -66,6 +66,10 @@
   background-color: #d94f43;
 }
 
+.btn--active {
+  background-color: var(--bg-active);
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

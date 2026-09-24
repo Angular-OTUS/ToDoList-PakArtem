@@ -3,7 +3,7 @@
 <div class="backlog-content">
   <div class="list-wrapper">
     <mat-form-field class="status-filter">
-      <mat-label>Status</mat-label>
+      <mat-label i18n="@@status">Status</mat-label>
       <mat-select [(ngModel)]="selectedStatus">
         @for (status of statuses; track status) {
           <mat-option [value]="status.value">{{ status.viewValue }}</mat-option>
@@ -16,7 +16,8 @@
         <li
           appToDoItem
           tabindex="0"
-          appTooltip="Показать описание"
+          appTooltip="Show description"
+          i18n-appTooltip="@@showDescription"
           [routerLink]="['/backlog', task.id]"
           routerLinkActive="selected"
           [task]="task"

@@ -1,14 +1,16 @@
-<h3 class="task-status">{{ status() }} ({{ tasks().length }})</h3>
+@let taskList = tasks();
+
+<h3 class="task-status">{{ getStatusLabel(status()) }} ({{ taskList.length }})</h3>
 
 <ul
   class="task-list"
   cdkDropList
-  [cdkDropListData]="tasks()"
+  [cdkDropListData]="taskList"
   [id]="status()"
   (cdkDropListDropped)="taskDrop.emit($event)"
-  [class.empty]="tasks().length === 0"
+  [class.empty]="taskList.length === 0"
 >
-  @for (task of tasks(); track task.id) {
+  @for (task of taskList; track task.id) {
     <li class="task-item" cdkDrag [cdkDragData]="task" tabindex="0" [id]="task.id">
       {{ task.text }}
     </li>

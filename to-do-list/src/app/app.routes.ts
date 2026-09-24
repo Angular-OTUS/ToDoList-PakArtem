@@ -12,20 +12,24 @@ export const routes: Routes = [
   {
     path: 'backlog',
     component: Backlog,
+    data: { titleKey: $localize`:@@navigationBacklog:Backlog` },
     children: [
       {
         path: ':id',
         component: ToDoItemViewWrapper,
+        data: { titleKey: $localize`:@@navigationTaskDetail:TaskDetail` },
       },
     ],
   },
   {
     path: 'board',
     component: Board,
+    data: { titleKey: $localize`:@@navigationBoard:Board` },
     children: [
       {
         path: ':id',
         component: ToDoItemViewWrapper,
+        data: { titleKey: $localize`:@@navigationTaskDetail:TaskDetail` },
       },
     ],
   },
