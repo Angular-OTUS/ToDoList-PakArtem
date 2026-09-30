@@ -1,0 +1,8 @@
+<app-to-do-user-avatar [name]="message().author.name"></app-to-do-user-avatar>
+<div class="message-content">
+  <div class="author">{{ message().author.name }}</div>
+  <div class="message-body">
+    <div class="text">{{ message().text }}</div>
+    <div class="time">{{ message().createdAt }}</div>
+  </div>
+</div>

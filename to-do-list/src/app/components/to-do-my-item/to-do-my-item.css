@@ -1,0 +1,52 @@
+:host {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-main);
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.task-checkbox {
+  margin-right: 25px;
+}
+
+.my-task-card {
+  flex: 1;
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-title {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.task-description {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-icon {
+  margin-left: 10px;
+}
+
+.task-members {
+  display: flex;
+
+  app-to-do-user-avatar {
+    margin-left: -8px;
+  }
+
+  app-to-do-user-avatar:first-child {
+    margin-left: 0;
+  }
+}

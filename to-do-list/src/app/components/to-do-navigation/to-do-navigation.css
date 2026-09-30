@@ -3,11 +3,13 @@
   flex-direction: column;
   color: var(--text-primary);
   font-size: 20px;
+  padding-right: 5%;
 }
 
 .link {
-  display: block;
-  margin-right: 5%;
+  display: flex;
+  gap: 5px;
+  align-items: center;
   padding-inline: 30px;
   padding-block: 10px;
   border-radius: 0 25px 25px 0;

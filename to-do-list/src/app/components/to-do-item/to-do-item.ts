@@ -10,7 +10,6 @@ import { take } from 'rxjs';
 import { Task } from '../../interfaces/task.interface';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'li[appToDoItem]',
   imports: [TooltipDirective, MatInputModule, FormsModule, ToDoButton],
   templateUrl: './to-do-item.html',

@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  gap: 10px;
+}
+
+:host(.mine) {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+
+  .author {
+    text-align: right;
+  }
+
+  .message-body {
+    background-color: #333285;
+  }
+}
+
+.message-body {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #593180;
+}
+
+.time {
+  font-style: italic;
+  font-size: 10px;
+  text-align: right;
+}

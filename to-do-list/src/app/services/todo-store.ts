@@ -3,6 +3,7 @@ import { TodoApi } from './todo-api';
 import { Task } from '../interfaces/task.interface';
 import { finalize, forkJoin, Observable, tap } from 'rxjs';
 import { TodoStatus } from '../type/todo-status.type';
+import { TaskMember } from '../interfaces/roles.interface';
 
 @Service()
 export class TodoStore {
@@ -24,7 +25,11 @@ export class TodoStore {
     );
   }
 
-  addTask(text: string, description: string): Observable<Task> {
+  getTask(id: number): Observable<Task> {
+    return this.todoApi.getTask(id);
+  }
+
+  addTask(text: string, description: string, roles: TaskMember[]): Observable<Task> {
     const tasks = this.tasksSignal();
 
     const maxOrder = tasks.length ? Math.max(...tasks.map((task) => task.order)) : -1;
@@ -32,6 +37,7 @@ export class TodoStore {
     const newTask: Omit<Task, 'id'> = {
       text,
       description,
+      roles,
       status: 'ToDo',
       order: maxOrder + 1,
     };

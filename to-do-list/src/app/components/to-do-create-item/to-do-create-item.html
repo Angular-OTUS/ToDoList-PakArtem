@@ -1,42 +1,85 @@
 <form #todoForm="ngForm" class="form" (ngSubmit)="addTask()">
-  <div class="form-fields">
-    <mat-form-field appearance="outline" subscriptSizing="dynamic">
-      <input
-        class="title-input"
-        name="title"
-        matInput
-        placeholder="Add your new todo"
-        i18n-placeholder="@@addTodoPlaceholder"
-        [(ngModel)]="model.title"
-        required
-      />
-    </mat-form-field>
+  <div class="form-fields-wrapper">
+    <div class="form-fields">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <input
+          class="title-input"
+          name="title"
+          matInput
+          placeholder="Add your new todo"
+          i18n-placeholder="@@addTodoPlaceholder"
+          [(ngModel)]="model.title"
+          required
+        />
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <textarea
-        class="description-input"
-        name="description"
-        matInput
-        placeholder="Description"
-        i18n-placeholder="@@descriptionPlaceholder"
-        subscriptSizing="dynamic"
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        [(ngModel)]="model.description"
-      ></textarea>
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <textarea
+          class="description-input"
+          name="description"
+          matInput
+          placeholder="Description"
+          i18n-placeholder="@@descriptionPlaceholder"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          [(ngModel)]="model.description"
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <button
+      app-button
+      appTooltip="Add Task"
+      i18n-appTooltip="@@addTaskTooltip"
+      i18n="@@addTask"
+      type="submit"
+      class="btn"
+      variant="add"
+      [disabled]="todoForm.invalid"
+    >
+      Add task
+    </button>
   </div>
 
-  <button
-    app-button
-    appTooltip="Add Task"
-    i18n-appTooltip="@@addTaskTooltip"
-    i18n="@@addTask"
-    type="submit"
-    class="btn"
-    variant="add"
-    [disabled]="todoForm.invalid"
-  >
-    Add task
-  </button>
+  <div class="members-wrapper">
+    <div class="members">
+      @for (role of model.roles; track $index) {
+        <div class="member-row">
+          <button
+            type="button"
+            class="member-row__remove"
+            (click)="removeRole($index)"
+            aria-label="Remove member"
+          >
+            ×
+          </button>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Role</mat-label>
+
+            <mat-select [name]="'role-' + $index" [(ngModel)]="role.role">
+              <mat-option value="Creator">Creator</mat-option>
+              <mat-option value="Responsible">Responsible</mat-option>
+              <mat-option value="Assignee">Assignee</mat-option>
+              <mat-option value="Reviewer">Reviewer</mat-option>
+              <mat-option value="Tester">Tester</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>User</mat-label>
+
+            <mat-select [name]="'user-' + $index" [(ngModel)]="role.userId">
+              @for (user of users; track user.id) {
+                <mat-option [value]="user.id">
+                  {{ user.name }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      }
+    </div>
+    <button app-button type="button" class="btn" variant="add" (click)="addRole()">+</button>
+  </div>
 </form>

@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  gap: 20px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  flex: 1 1 100%;
+  min-width: 0;
+
+  transition: flex-basis 300ms ease;
+}
+
+.chat {
+  flex: 0 0 0;
+  min-width: 0;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateX(30px);
+
+  transition:
+    flex-basis 300ms ease,
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+:host:has(.selected) {
+  .list {
+    flex: 0 0 calc(50% - 10px);
+  }
+
+  .chat {
+    flex: 0 0 calc(50% - 10px);
+
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.selected {
+  background-color: #1a1b39;
+}

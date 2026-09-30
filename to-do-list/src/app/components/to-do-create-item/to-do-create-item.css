@@ -1,11 +1,14 @@
 .form {
   display: flex;
-  gap: 16px;
-  align-items: flex-start;
+  flex-direction: column;
 }
 
-.form mat-form-field {
-  flex: 1;
+.form-fields-wrapper,
+.members-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .form-fields {
@@ -35,4 +38,48 @@
   background: white;
   transition: all 0.3s ease;
   outline: none;
+}
+
+.members {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.member-row {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  padding: 20px 16px 4px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.member-row__remove {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #888;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 100;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.member-row__remove:hover {
+  color: #d32f2f;
+  background-color: #fbe9e9;
 }

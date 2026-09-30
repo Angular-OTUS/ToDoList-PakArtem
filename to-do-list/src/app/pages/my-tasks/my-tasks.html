@@ -1,0 +1,13 @@
+<ul class="list">
+  @for (task of myTasks(); track task.id) {
+    <li
+      appToDoMyItem
+      [routerLink]="['/myTasks', task.id]"
+      routerLinkActive="selected"
+      [task]="task"
+    ></li>
+  }
+</ul>
+<div class="chat">
+  <router-outlet />
+</div>

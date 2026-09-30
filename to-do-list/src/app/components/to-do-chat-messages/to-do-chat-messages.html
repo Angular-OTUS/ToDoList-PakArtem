@@ -1,0 +1,6 @@
+@for (message of messages(); track message.id) {
+  <app-to-do-chat-message
+    [message]="message"
+    [isMine]="message.author.authorId === currentUserId"
+  />
+}

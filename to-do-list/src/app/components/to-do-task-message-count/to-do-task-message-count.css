@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  align-items: center;
+  background-color: #373783;
+  padding: 5px 12px;
+  border-radius: 15px;
+}
+
+mat-icon {
+  width: 15px;
+  height: 15px;
+  font-size: 15px;
+  line-height: 15px;
+}
+
+.message-count-value {
+  margin-left: 5px;
+}

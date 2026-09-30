@@ -5,6 +5,7 @@
     routerLinkActive="selected"
     i18n="@@backlog"
   >
+    <mat-icon>list_alt</mat-icon>
     Backlog
   </a>
   <a
@@ -13,6 +14,16 @@
     routerLinkActive="selected"
     i18n="@@board"
   >
+    <mat-icon>view_kanban</mat-icon>
     Board
+  </a>
+  <a
+    class="link cursor-pointer"
+    [routerLink]="['/myTasks']"
+    routerLinkActive="selected"
+    i18n="@@board"
+  >
+    <mat-icon>person</mat-icon>
+    MyTasks
   </a>
 </nav>

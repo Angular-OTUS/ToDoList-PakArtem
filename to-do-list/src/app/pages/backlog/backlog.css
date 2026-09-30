@@ -4,6 +4,11 @@
   height: 100%;
 }
 
+app-to-do-create-item {
+  display: block;
+  margin-bottom: 24px;
+}
+
 .backlog-content {
   display: flex;
   justify-content: space-between;
