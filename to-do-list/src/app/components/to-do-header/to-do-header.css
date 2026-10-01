@@ -20,6 +20,8 @@
   font-weight: 600;
 }
 
-app-to-do-language-switcher {
+.wrapper-controllers {
+  display: flex;
+  gap: 5px;
   margin-left: auto;
 }
