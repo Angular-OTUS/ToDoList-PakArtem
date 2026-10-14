@@ -18,6 +18,12 @@ html {
     )
   );
 
+  @include mat.dialog-overrides(
+    (
+      container-color: var(--bg-main),
+    )
+  );
+
   --mat-sys-on-surface: var(--text-primary);
   --mat-sys-surface-variant: var(--bg-main);
   --mat-sys-surface-container: var(--bg-main);

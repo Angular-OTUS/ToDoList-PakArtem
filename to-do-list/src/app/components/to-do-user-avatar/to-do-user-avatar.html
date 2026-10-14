@@ -1,0 +1,7 @@
+@if (imageUrl()) {
+  <img [src]="imageUrl()" [alt]="name()" />
+} @else {
+  <span class="avatar-placeholder" [style.background-color]="avatarColor()">
+    {{ name().slice(0, 2).toUpperCase() }}
+  </span>
+}

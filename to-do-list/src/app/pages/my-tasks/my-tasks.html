@@ -1,0 +1,15 @@
+<ul class="list">
+  @for (task of myTasks(); track task.id) {
+    <li
+      app-my-item
+      routerLinkActive="selected"
+      [routerLink]="['/myTasks', task.id]"
+      [task]="task"
+      [members]="membersByTask()[task.id]"
+      (statusChange)="changeStatus(task.id, $event)"
+    ></li>
+  }
+</ul>
+<div class="chat">
+  <router-outlet />
+</div>

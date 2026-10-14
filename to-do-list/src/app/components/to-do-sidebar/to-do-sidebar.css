@@ -2,3 +2,10 @@
   display: block;
   background-color: var(--bg-main);
 }
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 30px;
+  font-size: 30px;
+}

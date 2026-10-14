@@ -1,0 +1,19 @@
+:host {
+  padding: 5px 12px;
+  border-radius: 15px;
+}
+
+:host.status--todo {
+  background: #8e6e2a;
+  color: #ffd56b;
+}
+
+:host.status--in-progress {
+  background: #133263;
+  color: #8cc1f5;
+}
+
+:host.status--completed {
+  background: #114939;
+  color: #23c287;
+}
